@@ -1,17 +1,20 @@
 Given(/^i am on the sign in page$/) do
-  
+  @system.loginSlack.visit
+  expect(@browser.find_element(id: "domain").displayed?).not_to eq nil
 end
 
 When(/^i enter the team name$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.loginSlack.sendTeamName("slack-web-automation2")
+  expect(@browser.find_element(id: "email").displayed?).not_to eq nil
 end
 
 When(/^i enter my valid email and password$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.loginSlack.sendLoginCredentials('slacktestgerrard@gmail.com','slackpass')
 end
 
 When(/^i click sign in$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.loginSlack.clickEnterButton
+  expect(@browser.find_element(id: "direct_messages").displayed?).not_to eq nil 
 end
 
 Then(/^i should see the general slack channel$/) do
