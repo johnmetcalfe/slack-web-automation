@@ -1,6 +1,6 @@
 class LoginPage < GenericPage
   def visit
-    @browser.get "https://slack.com/signin"
+    @browser.get "#{TestData.url}/signin"
   end
 
   def sendTeamName(teamName)

@@ -1,7 +1,7 @@
 class SlackAccountPage < GenericPage
 
   def visit
-    @driver.get "https://slack-web-automation.slack.com/account/settings"
+    @driver.get "#{TestData.url}/account/settings"
   end
 
 end
