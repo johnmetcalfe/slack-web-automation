@@ -1,11 +1,10 @@
 class SlackAccountPage < GenericPage
 
   def visit
-    @driver.get "https://slack-web-automation2.slack.com/account/settings"
+    @driver.get "#{TestData.url}/account/settings"
   end
 
   def expand_username
-    sleep 1
     @driver.find_element(css: '#change_username > a').click
 
   end

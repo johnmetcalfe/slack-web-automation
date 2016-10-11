@@ -1,6 +1,6 @@
 class LoginPage < GenericPage
   def visit
-    @driver.get "https://slack.com/signin"
+    @driver.get "#{TestData.url}/signin"
   end
 
   def sendTeamName(teamName)

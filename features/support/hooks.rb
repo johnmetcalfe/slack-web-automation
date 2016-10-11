@@ -1,4 +1,7 @@
+
+# Setup
 browser = Selenium::WebDriver.for :chrome
+TestData.load
 
 Before do
   @browser ||= browser
@@ -7,7 +10,6 @@ Before do
 end
 
 After do |scenario|
-
 
 end
 
