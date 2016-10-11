@@ -5,7 +5,7 @@ Feature: account
     Given I am logged in as a user and on the Account pages
     When I click expand on username
     Then I should be able to enter a new username and click save
-    And It should Be updated in the top left of the page
+    And It should be updated in the username tab
 
   Scenario: Edit Password
 
