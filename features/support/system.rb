@@ -4,7 +4,7 @@ class System
     @browser = browser
   end
 
-  def slack
-    @slack ||= SlackAccountPage.new @browser
+  def account
+    @account ||= SlackAccountPage.new @browser
   end
 end
