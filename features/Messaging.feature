@@ -2,7 +2,6 @@ Feature: Messaging
 
   Scenario: Direct Message one person
 
-    Given I am 
 
   Scenario: Direct Message Multiple People
 
