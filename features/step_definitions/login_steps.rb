@@ -1,5 +1,5 @@
 Given(/^i am on the sign in page$/) do
-  
+  pending
 end
 
 When(/^i enter the team name$/) do

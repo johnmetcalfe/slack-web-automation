@@ -1,14 +1,18 @@
 Given(/^I am logged in as a user and on the Account pages$/) do
+
   @system.account.visit
-  binding.pry
+  @system.loginSlack.sendLoginCredentials("slacktestbob@gmail.com", "slackpass")
+
+
 end
 
 When(/^I click expand on username$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.expand_username
 end
 
 Then(/^I should be able to enter a new username and click save$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.change_username('testuser')
+  binding.pry
 end
 
 Then(/^It should Be updated in the top left of the page$/) do
