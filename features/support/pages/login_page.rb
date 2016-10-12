@@ -3,15 +3,17 @@ class LoginPage < GenericPage
     @driver.get "#{TestData.url}/signin"
   end
 
-  def sendTeamName(teamName)
-    @driver.find_element(id: "domain").send_keys(teamName)
+  def send_team_name(team_name)
+    @driver.find_element(id: "domain").send_keys(team_name)
     @driver.find_element(id: "submit_team_domain").click
   end
 
-  def sendLoginCredentials(email, password)
+  def send_login_credentials(email, password)
     @driver.find_element(id: "email").send_keys(email)
     @driver.find_element(id: "password").send_keys(password)
-    @driver.find_element(id: "signin_btn").click
   end
 
+  def click_enter_button
+    @driver.find_element(id: "signin_btn").click
+  end
 end

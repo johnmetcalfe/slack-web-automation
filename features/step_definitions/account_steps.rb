@@ -1,9 +1,6 @@
 Given(/^I am logged in as a user and on the Account pages$/) do
-
   @system.account.visit
-  @system.loginSlack.sendLoginCredentials("slacktestbob@gmail.com", "slackpass")
-
-
+  @system.login.send_login_credentials("slacktestbob@gmail.com", "slackpass")
 end
 
 When(/^I click expand on username$/) do
@@ -12,7 +9,6 @@ end
 
 Then(/^I should be able to enter a new username and click save$/) do
   @system.account.change_username('testuser')
-  binding.pry
 end
 
 Then(/^It should Be updated in the top left of the page$/) do
