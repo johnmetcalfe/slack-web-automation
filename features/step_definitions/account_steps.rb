@@ -57,17 +57,17 @@ Then(/^the email address for the account should be updated$/) do
 end
 
 When(/^I click expand on Timezone$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.expand_timezone
 end
 
 When(/^I open the drop down menu$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.open_dropdown
 end
 
 When(/^I select a different timezone$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.select_timezone
 end
 
 Then(/^the timeszone should be updated$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.assert_timezone
 end

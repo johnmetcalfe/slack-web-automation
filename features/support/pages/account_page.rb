@@ -81,4 +81,27 @@ class SlackAccountPage < GenericPage
     @driver.find_element(id: "new_email").send_keys "slacktestbob@gmail.com"
   end
 
+  def expand_timezone
+    @driver.find_element(css: "#change_timezone > a").click
+  end
+
+  def open_dropdown
+    @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select").click
+  end
+
+  def select_timezone
+    @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option:nth-child(39)").click
+    @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
+  end
+
+  def assert_timezone
+    @driver.find_element(css: '#change_timezone > form > p > b').text.include? "Cabo Verde"
+    expand_timezone
+    open_dropdown
+    @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option:nth-child(41)").click
+    @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
+    @driver.find_element(css: '#change_timezone > form > p > b').text.include? "Dublin"
+
+  end
+
 end
