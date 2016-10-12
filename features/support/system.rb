@@ -8,7 +8,7 @@ class System
     @account ||= SlackAccountPage.new @browser
   end
 
-  def loginSlack
+  def login
     @slack ||= LoginPage.new @browser
   end
 end
