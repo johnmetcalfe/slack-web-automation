@@ -1,11 +1,11 @@
 Feature: account
 
-  Scenario: Edit username
-
-    Given I am logged in as a user and on the Account pages
-    When I click expand on username
-    Then I should be able to enter a new username and click save
-    And It should Be updated in the top left of the page
+#  Scenario: Edit username
+#
+#    Given I am logged in as a user and on the Account pages
+#    When I click expand on username
+#    Then I should be able to enter a new username and click save
+#    And It should be updated in the username tab
 
   Scenario: Edit Password
 
@@ -19,7 +19,7 @@ Feature: account
 
     Given I am logged in as a user and on the Account pages
     When I click expand on email address
-    And Type in my current password
+    And Type in my current password for email
     And type in a new email address
     Then the email address for the account should be updated
 

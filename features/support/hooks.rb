@@ -1,12 +1,13 @@
 
 # Setup
 browser = Selenium::WebDriver.for :chrome
-TestData.load
+
 
 Before do
   @browser ||= browser
   @browser.manage.delete_all_cookies
   @system ||= System.new @browser
+  TestData.load
 end
 
 After do |scenario|
