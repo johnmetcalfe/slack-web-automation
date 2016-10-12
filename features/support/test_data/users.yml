@@ -1,0 +1,7 @@
+users:
+  - username: slackuser1
+    email: slackuser1@gmail.com
+    password: slackpassword1
+  - username: slackuser2
+    email: slackuser2@gmail.com
+    password: slackpassword2

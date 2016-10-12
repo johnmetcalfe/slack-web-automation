@@ -88,8 +88,10 @@ class AccountPage < GenericPage
     @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select").click
   end
 
-  def select_timezone
-    @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option:nth-child(39)").click
+  def select_timezone(timezone)
+    @driver.find_elements(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option").each do |zone|
+      zone.click if zone.attribute("value") == timezone
+    end
     @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
   end
 
@@ -98,6 +100,7 @@ class AccountPage < GenericPage
     expand_timezone
     open_dropdown
     @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option:nth-child(41)").click
+    binding.pry
     @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
     @driver.find_element(css: '#change_timezone > form > p > b').text.include? "Dublin"
   end

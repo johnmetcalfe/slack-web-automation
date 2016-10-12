@@ -1,6 +1,7 @@
 Given(/^I am logged in as a user and on the Account pages$/) do
   @system.account.visit
-  @system.loginSlack.sendLoginCredentials("slacktestbob@gmail.com", TestData.password)
+  @system.login.send_login_credentials("slacktestbob@gmail.com", TestData.password)
+  @system.login.click_enter_button
 end
 
 When(/^I click expand on username$/) do
@@ -54,17 +55,38 @@ Then(/^the email address for the account should be updated$/) do
 end
 
 When(/^I click expand on Timezone$/) do
-  @system.account.expand_timezone
+  @system.account.expand_timezone_section
 end
 
-When(/^I open the drop down menu$/) do
-  @system.account.open_dropdown
-end
-
-When(/^I select a different timezone$/) do
-  @system.account.select_timezone
+When(/^I choose a different timezone$/) do
+  @system.account.set_timezone "Europe/Lisbon"
 end
 
 Then(/^the timeszone should be updated$/) do
-  @system.account.assert_timezone
+  @system.account.assert_timezone "Europe/Lisbon"
+  @system.account.set_timezone "Europe/London" # Reset to default
+end
+
+
+
+Then(/^something$/) do
+  @user1 = TestData.users[0]
+  @user2 = TestData.users[1]
+end
+
+Then(/^something$/) do
+  @system.login_as @user1
+  @system.sidebar.select_channel "#general"
+  @system.messages.send_message "Hello"
+end
+
+Then(/^something$/) do
+  @system.login_as @user2
+  @system.sidebar.select_channel "#general"
+  @system.messages.assert_message_visible "Hello"
+  @system.messages.assert_message_is_from @user1[:username]
+end
+
+Then(/^something$/) do
+
 end
