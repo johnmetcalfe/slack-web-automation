@@ -48,11 +48,37 @@ class SlackAccountPage < GenericPage
     @driver.find_element(css: "#change_password > div > form.col.span_1_of_2 > p:nth-child(5) > button").click
     # CURRENTLY DOES NOT WRITE TO YAML FILE
 
-
-    d = YAML::load_file('../test_data/password.yml') #Load
+    d = YAML::load_file(File.dirname(__FILE__) + "/../test_data/settings.yml") #Load
     d['password'] = new_pass #Modify
-    File.open('../test_data/password.yml', 'w') {|f| f.write d.to_yaml }
+    File.write(File.dirname(__FILE__) + "/../test_data/settings.yml", d.to_yaml)
+  end
 
+  def assert_password
+    source.include? "Your password has been updated successfully."
+  end
+
+  def expand_email
+    @driver.find_element(css: "#change_email > a").click
+  end
+
+  def email_pass
+    @driver.find_element(id: "email_password").send_keys TestData.password
+  end
+
+  def new_email
+    @driver.find_element(id: "new_email").send_keys "john.metcalfe16@gmail.com"
+  end
+
+  def sumbit_email
+    @driver.find_element(css: "#email_form > p:nth-child(5) > button").click
+  end
+
+  def assert_email
+    source.include? "john.metcalfe16@gmail.com"
+  end
+
+  def old_email
+    @driver.find_element(id: "new_email").send_keys "slacktestbob@gmail.com"
   end
 
 end

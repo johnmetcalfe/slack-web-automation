@@ -30,23 +30,30 @@ end
 
 When(/^Type in a new password$/) do
   @system.account.type_new_pass
-  
+
 end
 
 Then(/^the account password should be updated$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.assert_password
 end
 
 When(/^I click expand on email address$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.expand_email
+end
+When(/^Type in my current password for email$/) do
+  @system.account.email_pass
 end
 
 When(/^type in a new email address$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.new_email
+  @system.account.sumbit_email
 end
 
 Then(/^the email address for the account should be updated$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.account.assert_email
+  @system.account.expand_email
+  @system.account.email_pass
+  @system.account.old_email
 end
 
 When(/^I click expand on Timezone$/) do

@@ -19,7 +19,7 @@ Feature: account
 
     Given I am logged in as a user and on the Account pages
     When I click expand on email address
-    And Type in my current password
+    And Type in my current password for email
     And type in a new email address
     Then the email address for the account should be updated
 
