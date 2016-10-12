@@ -21,7 +21,7 @@ class SlackAccountPage < GenericPage
 
   def reset_username
     @driver.find_element(class: "username_input").clear
-    @driver.find_element(class: "username_input").send_keys "slacktestbob"
+    @driver.find_element(class: "username_input").send_keys "testuser"
     @driver.find_element(css: "#change_username > div > form > div > button").click
   end
 
