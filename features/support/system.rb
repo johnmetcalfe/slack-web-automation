@@ -5,7 +5,7 @@ class System
   end
 
   def account
-    @account ||= SlackAccountPage.new @browser
+    @account ||= AccountPage.new @browser
   end
 
   def login

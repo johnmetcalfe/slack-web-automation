@@ -13,7 +13,7 @@ end
 
 Then(/^It should be updated in the username tab$/) do
   @system.account.expand_username
-  @system.account.assert_username
+  @system.account.assert_username('slacktestbob')
   @system.account.reset_username
 end
 
@@ -31,7 +31,7 @@ When(/^Type in a new password$/) do
 end
 
 Then(/^the account password should be updated$/) do
-  @system.account.assert_password
+  @system.account.assert_password_updated
 end
 
 When(/^I click expand on email address$/) do

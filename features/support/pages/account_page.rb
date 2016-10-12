@@ -1,4 +1,4 @@
-class SlackAccountPage < GenericPage
+class AccountPage < GenericPage
 
   def visit
     @driver.get "#{TestData.url}/account/settings"
@@ -9,14 +9,13 @@ class SlackAccountPage < GenericPage
   end
 
   def change_username(user)
-    @user = user
     @driver.find_element(class: "username_input").clear
-    @driver.find_element(class: "username_input").send_keys @user
+    @driver.find_element(class: "username_input").send_keys user
     @driver.find_element(css: "#change_username > div > form > div > button").click
   end
 
-  def assert_username
-    @driver.find_element(class: "username_input").to eq(@user)
+  def assert_username(user)
+    @driver.find_element(class: "username_input").to eq(user)
   end
 
   def reset_username
@@ -53,7 +52,7 @@ class SlackAccountPage < GenericPage
     File.write(File.dirname(__FILE__) + "/../test_data/settings.yml", d.to_yaml)
   end
 
-  def assert_password
+  def assert_password_updated
     source.include? "Your password has been updated successfully."
   end
 
@@ -101,7 +100,6 @@ class SlackAccountPage < GenericPage
     @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option:nth-child(41)").click
     @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
     @driver.find_element(css: '#change_timezone > form > p > b').text.include? "Dublin"
-
   end
 
 end
