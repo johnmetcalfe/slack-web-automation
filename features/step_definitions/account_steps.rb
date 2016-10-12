@@ -30,6 +30,7 @@ end
 
 When(/^Type in a new password$/) do
   @system.account.type_new_pass
+  
 end
 
 Then(/^the account password should be updated$/) do

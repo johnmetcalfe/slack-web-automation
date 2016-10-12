@@ -42,15 +42,16 @@ class SlackAccountPage < GenericPage
     new_number = number + 1
     new_number.to_s
     new_pass = "#{new_string}#{new_number}"
-    binding.pry
 
     @driver.find_element(id: "password").send_keys new_pass
 
     @driver.find_element(css: "#change_password > div > form.col.span_1_of_2 > p:nth-child(5) > button").click
     # CURRENTLY DOES NOT WRITE TO YAML FILE
-    data = YAML.load_file "../test_data/*.yml"
-    data["password"] = new_pass
-    File.open("../test_data/*.yml", 'w') { |f| YAML.dump(data, f) }
+
+
+    d = YAML::load_file('../test_data/password.yml') #Load
+    d['password'] = new_pass #Modify
+    File.open('../test_data/password.yml', 'w') {|f| f.write d.to_yaml }
 
   end
 
