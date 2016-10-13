@@ -35,15 +35,15 @@ class LoginPage < GenericPage
   end
 
   def click_enter_button
-    @driver.find_element(id: 'signin_btn').click
+    el(:signin_btn).click
   end
 
   def assert_error_message
     if els(:alert_error).empty?
       @@wait.until do
-        @driver.find_element(id: 'direct_messages').displayed?
+        el(:direct_messages).displayed?
       end
-      variable = @driver.find_element(id: 'direct_messages').displayed?
+      variable = el(:direct_messages).displayed?
       expect(variable).not_to eq nil
     else
       expect(el(:alert_error).displayed?).to eq true
@@ -56,7 +56,9 @@ class LoginPage < GenericPage
     submit_team_domain: '#submit_team_domain',
     email: '#email',
     password: '#password',
-    channel_title: '#channel_title'
+    channel_title: '#channel_title',
+    signin_btn: '#signin_btn',
+    direct_messages: '#direct_messages'
   }
 
   def el(symbol)
