@@ -7,8 +7,6 @@ Before do
 end
 
 After do |scenario|
-
-
 end
 
 at_exit do

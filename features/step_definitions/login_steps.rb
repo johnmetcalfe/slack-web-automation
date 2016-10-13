@@ -1,56 +1,36 @@
-wait = Selenium::WebDriver::Wait.new(:timeout => 15)
-
 Given(/^i am on the sign in page$/) do
-  @system.login.visit
-  expect(@browser.find_element(id: 'domain').displayed?).not_to eq nil
+  @system.login_page.visit
 end
 
-When(/^i enter the team name$/) do
-  @system.login.send_team_name('slack-web-automation2')
-  expect(@browser.find_element(id: 'email').displayed?).not_to eq nil
-end
-
-When(/^i enter my valid email and password$/) do
-  @system.login.send_login_credentials('slacktestgerrard@gmail.com','slackpass')
-  expect(@browser.find_element(id: 'email')).not_to eq nil
-end
-
-When(/^i click sign in$/) do
-  @system.login.click_enter_button
-  if @browser.find_elements(class: 'alert_error').size() > 0
-    expect(@browser.find_element(class: 'alert_error').displayed?).to eq true
-  else
-    wait.until {
-      @browser.find_element(id: 'direct_messages').displayed?
-    }
-    expect(@browser.find_element(id: 'direct_messages').displayed?).not_to eq nil
-  end
+When(/^i login with valid details$/) do
+  @system.login_page.send_login_credentials('slacktestgerrard@gmail.com', 'slackpass')
 end
 
 Then(/^i should see the general slack channel$/) do
-  @browser.get('https://slack-web-automation2.slack.com/messages/general/')
-  wait.until {
-    @browser.find_element(id: 'channel_title').displayed?
-  }
-  expect(@browser.find_element(id: 'channel_title').attribute('innerHTML')).to eq '#general'
+  @system.login_page.check_for_channel('general')
 end
 
-When(/^i enter my invalid email and password$/) do
- @system.login.send_login_credentials('slacktestgerrard@gmail.co.uk','slackfail')
- @system.login.click_enter_button
- expect(@system.login.url).to eq 'https://slack-web-automation2.slack.com/'
- expect(@browser.find_element(class: 'alert_error').displayed?).to eq true
+When(/^i enter a valid team name$/) do
+  @system.login_page.send_team_name('slack-web-automation2')
 end
 
-Then(/^i should see an appropriate error message$/) do
- expect(@browser.find_element(class: 'alert_error').displayed?).to eq true
+When(/^i attempt to log in with invalid details$/) do
+  @system.login_page.send_login_credentials('slacktestgerrard@gmail.co.uk', 'slackfail')
 end
 
-When(/^i enter the incorrect but a valid team name$/) do
-  @system.login.send_team_name('skybettingandgaming')
+Then(/^i should see an error message$/) do
+  @system.login_page.assert_error_message
 end
 
-When(/^i enter an invalid team name$/) do
-  @system.login.send_team_name('thisisainvalidslackname3257425')
-  expect(@browser.find_element(class: 'alert_error').displayed?).to eq true
+When(/^i enter a valid teamname that i am not a member of$/) do
+  @system.login_page.send_team_name('skybettingandgaming')
+end
+
+When(/^i attempt to login with valid details$/) do
+  @system.login_page.send_login_credentials('slacktestgerrard@gmail.com', 'slackpass')
+end
+
+When(/^i attempt to login with an invalid team name$/) do
+  @system.login_page.send_team_name('thisisainvalidslackname3257425')
+  @system.login_page.assert_error_message
 end
