@@ -7,10 +7,10 @@ class LoginPage < GenericPage
   end
 
   def send_team_name(teamName)
-    @driver.find_element(id: 'domain').send_keys(teamName)
-    @driver.find_element(id: 'submit_team_domain').click
-    unless @driver.find_elements(id: 'email').empty?
-      expect(@driver.find_element(id: 'email').displayed?).not_to eq nil
+    el(:domain).send_keys(teamName)
+    el(:submit_team_domain).click
+    unless els(:email).empty?
+      expect(el(:email).displayed?).not_to eq nil
     end
     # return self
   end
@@ -51,7 +51,10 @@ class LoginPage < GenericPage
   end
 
   @@dictionary = {
-    alert_error: '.alert_error'
+    alert_error: '.alert_error',
+    domain: '#domain',
+    submit_team_domain: '#submit_team_domain',
+    email: '#email'
   }
 
   def el(symbol)
