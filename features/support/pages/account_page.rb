@@ -13,27 +13,27 @@ class AccountPage < GenericPage
 
   def change_username_to(user)
     expand_section :username
-    @driver.find_element(class: "username_input").clear
-    @driver.find_element(class: "username_input").send_keys user
-    @driver.find_element(css: "#change_username > div > form > div > button").click
+    el(:username_input).clear
+    el(:username_input).send_keys user
+    el(:username_submit_button).click
   end
 
   def assert_username_is(user)
     expand_section :username
-    expect(@driver.find_element(class: "username_input").attribute("value")).to eq(user)
+    expect(el(:username_input).attribute("value")).to eq(user)
   end
 
   def reset_username_to(user)
-    @driver.find_element(class: "username_input").clear
-    @driver.find_element(class: "username_input").send_keys user
-    @driver.find_element(css: "#change_username > div > form > div > button").click
+    el(:username_input).clear
+    el(:username_input).send_keys user
+    el(:username_submit_button).click
   end
 
   ##### PASSWORD TEST FUNCTIONS #####
 
   def change_password
     expand_section :password
-    @driver.find_element(id: "old_password").send_keys TestData.password
+    el(:password_old_field).send_keys TestData.password
     my_string = TestData.password
     hello = my_string.scan( /\d+$/ ).first
     new_string = my_string.gsub(/(\W|\d)/, "")
@@ -41,8 +41,8 @@ class AccountPage < GenericPage
     new_number = number + 1
     new_number.to_s
     $new_pass = "#{new_string}#{new_number}"
-    @driver.find_element(id: "password").send_keys $new_pass
-    @driver.find_element(css: "#change_password > div > form.col.span_1_of_2 > p:nth-child(5) > button").click
+    el(:password_new_field).send_keys $new_pass
+    el(:password_submit_button).click
     d = YAML::load_file(File.dirname(__FILE__) + "/../test_data/settings.yml") #Load
     d['password'] = $new_pass #Modify
     File.write(File.dirname(__FILE__) + "/../test_data/settings.yml", d.to_yaml)
@@ -56,9 +56,9 @@ class AccountPage < GenericPage
 
   def change_email_to(email)
     expand_section :email
-    @driver.find_element(id: "email_password").send_keys TestData.password
-    @driver.find_element(id: "new_email").send_keys email
-    @driver.find_element(css: "#email_form > p:nth-child(5) > button").click
+    el(:email_password_field).send_keys TestData.password
+    el(:email_new_field).send_keys email
+    el(:email_submit_button).click
   end
 
   def assert_email_is(email)
@@ -67,30 +67,55 @@ class AccountPage < GenericPage
 
   def reset_email_to_default
     expand_section :email
-    @driver.find_element(id: "email_password").send_keys TestData.password
-    @driver.find_element(id: "new_email").send_keys "slacktestbob@gmail.com"
+    el(:email_password_field).send_keys TestData.password
+    el(:email_new_field).send_keys "slacktestbob@gmail.com"
+    el(:email_submit_button).click
   end
 
   ##### TIMEZONE TEST FUNCTIONS #####
 
   def change_timezone_to(timezone)
     expand_section :timezone
-    @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select").click
-    @driver.find_elements(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option").each do |zone|
+    el(:timezone_open_dropdown_button).click
+    els(:timezone_dropdown_options).each do |zone|
       zone.click if zone.attribute("value") == timezone
     end
-    @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
+    el(:timezone_submit_button).click
   end
 
   def assert_timezone_is(timezone)
     new_timezone = timezone.split('/')[-1]
-    @driver.find_element(css: '#change_timezone > form > p > b').text.include? new_timezone
+    sleep 1
+    el(:timezone_text).text.include? new_timezone
   end
 
   ##### DICTIONARY #####
 
   @@dictionary = {
-    
+    email_password_field: "#email_password",
+    email_new_field: "#new_email",
+    email_submit_button: "#email_form > p:nth-child(5) > button",
+    password_new_field: "#password",
+    password_old_field: "#old_password",
+    password_submit_button: "#change_password > div > form.col.span_1_of_2 > p:nth-child(5) > button",
+    timezone_open_dropdown_button: "#change_timezone > form > div > p.no_bottom_margin > label > select",
+    timezone_dropdown_options: "#change_timezone > form > div > p.no_bottom_margin > label > select > option",
+    timezone_submit_button: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label",
+    timezone_text: "#change_timezone > form > p > b",
+    username_input: ".username_input",
+    username_submit_button: "#change_username > div > form > div > button"
   }
+
+  def el(symbol)
+
+    @driver.find_element(css: @@dictionary[symbol])
+
+  end
+
+  def els(symbol)
+
+    @driver.find_elements(css: @@dictionary[symbol])
+
+  end
 
 end

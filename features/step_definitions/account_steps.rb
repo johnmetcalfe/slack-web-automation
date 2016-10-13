@@ -1,7 +1,7 @@
-Given(/^I am logged in as a user and on the account_page pages$/) do
+Given(/^I am logged in as a user and on the Account pages$/) do
 
   @system.account_page.visit
-  @system.loginSlack.sendLoginCredentials("slacktestbob@gmail.com", TestData.password)
+  @system.login_page.sendLoginCredentials("slacktestbob@gmail.com", TestData.password)
 
 end
 
