@@ -3,7 +3,7 @@ class LoginPage < GenericPage
 
   def visit
     @driver.get 'https://slack.com/signin'
-    expect(@driver.find_element(id: 'domain').displayed?).not_to eq nil
+    expect(el(:domain).displayed?).not_to eq nil
   end
 
   def send_team_name(teamName)
@@ -51,13 +51,13 @@ class LoginPage < GenericPage
 
   @@dictionary = {
     alert_error: '.alert_error',
+    channel_title: '#channel_title',
+    direct_messages: '#direct_messages',
     domain: '#domain',
-    submit_team_domain: '#submit_team_domain',
     email: '#email',
     password: '#password',
-    channel_title: '#channel_title',
     signin_btn: '#signin_btn',
-    direct_messages: '#direct_messages'
+    submit_team_domain: '#submit_team_domain'
   }
 
   def el(symbol)
