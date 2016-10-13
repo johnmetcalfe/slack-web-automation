@@ -29,9 +29,9 @@ class LoginPage < GenericPage
   def check_for_channel(channel_name)
     @driver.get("https://slack-web-automation2.slack.com/messages/#{channel_name}")
     @@wait.until do
-      @driver.find_element(id: 'channel_title').displayed?
+      el(:channel_title).displayed?
     end
-    expect(@driver.find_element(id: 'channel_title').attribute('innerHTML')).to eq "##{channel_name}"
+    expect(el(:channel_title).attribute('innerHTML')).to eq "##{channel_name}"
   end
 
   def click_enter_button
@@ -55,7 +55,8 @@ class LoginPage < GenericPage
     domain: '#domain',
     submit_team_domain: '#submit_team_domain',
     email: '#email',
-    password: '#password'
+    password: '#password',
+    channel_title: '#channel_title'
   }
 
   def el(symbol)
