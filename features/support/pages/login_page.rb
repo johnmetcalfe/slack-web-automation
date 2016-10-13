@@ -43,8 +43,7 @@ class LoginPage < GenericPage
       @@wait.until do
         el(:direct_messages).displayed?
       end
-      variable = el(:direct_messages).displayed?
-      expect(variable).not_to eq nil
+      expect(el(:direct_messages).displayed?).not_to eq nil
     else
       expect(el(:alert_error).displayed?).to eq true
     end
