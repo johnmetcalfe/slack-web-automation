@@ -1,4 +1,4 @@
-class SlackAccountPage < GenericPage
+class AccountPage < GenericPage
 
   def visit
     @driver.get "#{TestData.url}/account/settings"
@@ -20,7 +20,7 @@ class SlackAccountPage < GenericPage
 
   def assert_username_is(user)
     expand_section :username
-    @driver.find_element(class: "username_input").to eq(user)
+    expect(@driver.find_element(class: "username_input").attribute("value")).to eq(user)
   end
 
   def reset_username_to(user)
@@ -49,7 +49,7 @@ class SlackAccountPage < GenericPage
   end
 
   def assert_password_changed
-    source.include? "Your password has been updated successfully."
+    expect(source.include? "Your password has been updated successfully.").to be true
   end
 
   ##### EMAIL TEST FUNCTIONS #####
@@ -62,7 +62,7 @@ class SlackAccountPage < GenericPage
   end
 
   def assert_email_is(email)
-    source.include? email
+    expect(source.include? email).to be true
   end
 
   def reset_email_to_default
@@ -86,5 +86,11 @@ class SlackAccountPage < GenericPage
     new_timezone = timezone.split('/')[-1]
     @driver.find_element(css: '#change_timezone > form > p > b').text.include? new_timezone
   end
+
+  ##### DICTIONARY #####
+
+  @@dictionary = {
+    
+  }
 
 end
