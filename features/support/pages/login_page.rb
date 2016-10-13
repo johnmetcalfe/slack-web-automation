@@ -16,13 +16,13 @@ class LoginPage < GenericPage
   end
 
   def send_login_credentials(email, password)
-    unless @driver.find_elements(id: 'domain').empty?
+    unless els(:domain).empty?
       send_team_name('slack-web-automation2')
     end
-    expect(@driver.find_element(id: 'email').displayed?).not_to eq nil
-    @driver.find_element(id: 'email').send_keys(email)
-    expect(@driver.find_element(id: 'email')).not_to eq nil
-    @driver.find_element(id: 'password').send_keys(password)
+    expect(el(:email).displayed?).not_to eq nil
+    el(:email).send_keys(email)
+    expect(el(:email)).not_to eq nil
+    el(:password).send_keys(password)
     click_enter_button
   end
 
@@ -54,7 +54,8 @@ class LoginPage < GenericPage
     alert_error: '.alert_error',
     domain: '#domain',
     submit_team_domain: '#submit_team_domain',
-    email: '#email'
+    email: '#email',
+    password: '#password'
   }
 
   def el(symbol)
