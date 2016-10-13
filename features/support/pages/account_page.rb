@@ -4,104 +4,87 @@ class SlackAccountPage < GenericPage
     @driver.get "#{TestData.url}/account/settings"
   end
 
-  def expand_username
-    @driver.find_element(css: '#change_username > a').click
+
+  def expand_section(section)
+    @driver.find_element(css: "#change_#{section.to_s} > a").click
   end
 
-  def change_username(user)
-    @user = user
+  ##### USERNAME TEST FUNCTIONS #####
+
+  def change_username_to(user)
+    expand_section :username
     @driver.find_element(class: "username_input").clear
-    @driver.find_element(class: "username_input").send_keys @user
+    @driver.find_element(class: "username_input").send_keys user
     @driver.find_element(css: "#change_username > div > form > div > button").click
   end
 
-  def assert_username
-    @driver.find_element(class: "username_input").to eq(@user)
+  def assert_username_is(user)
+    expand_section :username
+    @driver.find_element(class: "username_input").to eq(user)
   end
 
-  def reset_username
+  def reset_username_to(user)
     @driver.find_element(class: "username_input").clear
-    @driver.find_element(class: "username_input").send_keys "testuser"
+    @driver.find_element(class: "username_input").send_keys user
     @driver.find_element(css: "#change_username > div > form > div > button").click
   end
 
-  def expand_password
-    @driver.find_element(css: "#change_password > a").click
-  end
+  ##### PASSWORD TEST FUNCTIONS #####
 
-  def type_current_pass
+  def change_password
+    expand_section :password
     @driver.find_element(id: "old_password").send_keys TestData.password
-  end
-
-  def type_new_pass
-    #INCREMENT PASSWORD BY 1
     my_string = TestData.password
     hello = my_string.scan( /\d+$/ ).first
     new_string = my_string.gsub(/(\W|\d)/, "")
     number = hello.to_i
     new_number = number + 1
     new_number.to_s
-    new_pass = "#{new_string}#{new_number}"
-
-    @driver.find_element(id: "password").send_keys new_pass
-
+    $new_pass = "#{new_string}#{new_number}"
+    @driver.find_element(id: "password").send_keys $new_pass
     @driver.find_element(css: "#change_password > div > form.col.span_1_of_2 > p:nth-child(5) > button").click
-    # CURRENTLY DOES NOT WRITE TO YAML FILE
-
     d = YAML::load_file(File.dirname(__FILE__) + "/../test_data/settings.yml") #Load
-    d['password'] = new_pass #Modify
+    d['password'] = $new_pass #Modify
     File.write(File.dirname(__FILE__) + "/../test_data/settings.yml", d.to_yaml)
   end
 
-  def assert_password
+  def assert_password_changed
     source.include? "Your password has been updated successfully."
   end
 
-  def expand_email
-    @driver.find_element(css: "#change_email > a").click
-  end
+  ##### EMAIL TEST FUNCTIONS #####
 
-  def email_pass
+  def change_email_to(email)
+    expand_section :email
     @driver.find_element(id: "email_password").send_keys TestData.password
-  end
-
-  def new_email
-    @driver.find_element(id: "new_email").send_keys "john.metcalfe16@gmail.com"
-  end
-
-  def sumbit_email
+    @driver.find_element(id: "new_email").send_keys email
     @driver.find_element(css: "#email_form > p:nth-child(5) > button").click
   end
 
-  def assert_email
-    source.include? "john.metcalfe16@gmail.com"
+  def assert_email_is(email)
+    source.include? email
   end
 
-  def old_email
+  def reset_email_to_default
+    expand_section :email
+    @driver.find_element(id: "email_password").send_keys TestData.password
     @driver.find_element(id: "new_email").send_keys "slacktestbob@gmail.com"
   end
 
-  def expand_timezone
-    @driver.find_element(css: "#change_timezone > a").click
-  end
+  ##### TIMEZONE TEST FUNCTIONS #####
 
-  def open_dropdown
+  def change_timezone_to(timezone)
+    expand_section :timezone
     @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select").click
-  end
-
-  def select_timezone
-    @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option:nth-child(39)").click
+    @driver.find_elements(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option").each do |zone|
+      zone.click if zone.attribute("value") == timezone
+    end
     @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
   end
 
-  def assert_timezone
-    @driver.find_element(css: '#change_timezone > form > p > b').text.include? "Cabo Verde"
-    expand_timezone
-    open_dropdown
-    @driver.find_element(css: "#change_timezone > form > div > p.no_bottom_margin > label > select > option:nth-child(41)").click
-    @driver.find_element(css: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label").click
-    @driver.find_element(css: '#change_timezone > form > p > b').text.include? "Dublin"
-
+  def assert_timezone_is(timezone)
+    new_timezone = timezone.split('/')[-1]
+    @driver.find_element(css: '#change_timezone > form > p > b').text.include? new_timezone
   end
 
 end

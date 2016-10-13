@@ -5,68 +5,39 @@ Given(/^I am logged in as a user and on the Account pages$/) do
 
 end
 
-When(/^I click expand on username$/) do
-  @system.account.expand_username
+When(/^I enter a new username and click save$/) do
+  @system.account.change_username_to('slacktestbob')
 end
 
-Then(/^I should be able to enter a new username and click save$/) do
-  @system.account.change_username('slacktestbob')
+Then(/^It should be updated in the username section$/) do
+  @system.account.assert_username_is('slacktestbob')
+  @system.account.reset_username_to('testuser1')
 end
 
-Then(/^It should be updated in the username tab$/) do
-  @system.account.expand_username
-  @system.account.assert_username
-  @system.account.reset_username
+
+When(/^I change my password$/) do
+  @system.account.change_password
 end
 
-When(/^I click expand on password$/) do
-  @system.account.expand_password
+Then(/^The account password should be updated$/) do
+  @system.account.assert_password_changed
 end
 
-When(/^Type in my current password$/) do
-  @system.account.type_current_pass
+When(/^I change my email address$/) do
+  @system.account.change_email_to('slacktestpob@gmail.com')
 end
 
-When(/^Type in a new password$/) do
-  @system.account.type_new_pass
-
+Then(/^The email address for the account should be updated$/) do
+  @system.account.assert_email_is('slacktestpob@gmail.com')
+  @system.account.reset_email_to_default
 end
 
-Then(/^the account password should be updated$/) do
-  @system.account.assert_password
+When(/^I change the timezone$/) do
+  @system.account.change_timezone_to("Europe/Amsterdam")
 end
 
-When(/^I click expand on email address$/) do
-  @system.account.expand_email
-end
-When(/^Type in my current password for email$/) do
-  @system.account.email_pass
-end
-
-When(/^type in a new email address$/) do
-  @system.account.new_email
-  @system.account.sumbit_email
-end
-
-Then(/^the email address for the account should be updated$/) do
-  @system.account.assert_email
-  @system.account.expand_email
-  @system.account.email_pass
-  @system.account.old_email
-end
-
-When(/^I click expand on Timezone$/) do
-  @system.account.expand_timezone
-end
-
-When(/^I open the drop down menu$/) do
-  @system.account.open_dropdown
-end
-
-When(/^I select a different timezone$/) do
-  @system.account.select_timezone
-end
-
-Then(/^the timeszone should be updated$/) do
-  @system.account.assert_timezone
+Then(/^The timezone should be updated$/) do
+  @system.account.assert_timezone_is("Europe/Amsterdam")
+  @system.account.change_timezone_to("Europe/London")
+  @system.account.assert_timezone_is("Europe/London")
 end
