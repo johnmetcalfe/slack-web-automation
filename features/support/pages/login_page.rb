@@ -1,15 +1,14 @@
 class LoginPage < GenericPage
-
-@@wait = Selenium::WebDriver::Wait.new(timeout: 15)
+  @@wait = Selenium::WebDriver::Wait.new(timeout: 15)
 
   def visit
-    @driver.get "https://slack.com/signin"
+    @driver.get 'https://slack.com/signin'
     expect(@driver.find_element(id: 'domain').displayed?).not_to eq nil
   end
 
   def send_team_name(teamName)
-    @driver.find_element(id: "domain").send_keys(teamName)
-    @driver.find_element(id: "submit_team_domain").click
+    @driver.find_element(id: 'domain').send_keys(teamName)
+    @driver.find_element(id: 'submit_team_domain').click
     unless @driver.find_elements(id: 'email').empty?
       expect(@driver.find_element(id: 'email').displayed?).not_to eq nil
     end
@@ -21,9 +20,9 @@ class LoginPage < GenericPage
       send_team_name('slack-web-automation2')
     end
     expect(@driver.find_element(id: 'email').displayed?).not_to eq nil
-    @driver.find_element(id: "email").send_keys(email)
+    @driver.find_element(id: 'email').send_keys(email)
     expect(@driver.find_element(id: 'email')).not_to eq nil
-    @driver.find_element(id: "password").send_keys(password)
+    @driver.find_element(id: 'password').send_keys(password)
     click_enter_button
   end
 
@@ -36,39 +35,39 @@ class LoginPage < GenericPage
   end
 
   def click_enter_button
-    @driver.find_element(id: "signin_btn").click
+    @driver.find_element(id: 'signin_btn').click
   end
 
   def assert_error_message
-    unless @driver.find_elements(class: 'alert_error').empty?
-      expect(@driver.find_element(class: 'alert_error').displayed?).to eq true
-    else
+    if els(:alert_error).empty?
       @@wait.until do
         @driver.find_element(id: 'direct_messages').displayed?
       end
       variable = @driver.find_element(id: 'direct_messages').displayed?
       expect(variable).not_to eq nil
+    else
+      expect(el(:alert_error).displayed?).to eq true
     end
   end
 
-  # def el(symbol)
-  #   dictionary = {
-  #     alert_error: ".qa-alert > p",
-  #     dm_section: "#direct_messages",
-  #     time_zone_expand_button: "#change_timezone > form > p > nonsense"
-  #   }
-  #   @driver.find_element(css: dictionary[symbol])
-  # end
-  #
-  # el(:time_zone_expand_button).displayed?
-  # el(:time_zone_expand_button).click
-end
+  @@dictionary = {
+    alert_error: '.alert_error'
+  }
 
-class Selenium::WebDriver::HTMLElement
-  def when_present
-    wait.until { self.displayed? }
-    return self
+  def el(symbol)
+    @driver.find_element(css: @@dictionary[symbol])
+  end
+
+  def els(symbol)
+    @driver.find_elements(css: @@dictionary[symbol])
   end
 end
 
-el(:time_zone_expand_button).when_present.click
+# class Selenium::WebDriver::HTMLElement
+#   def when_present
+#     wait.until { self.displayed? }
+#     return self
+#   end
+# end
+#
+# el(:time_zone_expand_button).when_present.click

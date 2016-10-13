@@ -1,5 +1,5 @@
 Given(/^I am logged in as a user and on the Account pages$/) do
-  @system.account.visit
+  @system.account_page.visit
 end
 
 When(/^I click expand on username$/) do
