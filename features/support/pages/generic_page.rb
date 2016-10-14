@@ -1,5 +1,7 @@
 class GenericPage
-  include RSpec::Matchers
+include RSpec::Matchers
+include Selenium::WebDriver
+
   def initialize(driver)
     @driver = driver
   end
