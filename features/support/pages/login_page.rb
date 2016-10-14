@@ -6,19 +6,15 @@ class LoginPage < GenericPage
     expect(el(:domain).displayed?).not_to eq nil
   end
 
-  def send_team_name(teamName)
-    el(:domain).send_keys(teamName)
+  def send_team_name(team_name)
+    el(:domain).send_keys(team_name)
     el(:submit_team_domain).click
-    unless els(:email).empty?
-      expect(el(:email).displayed?).not_to eq nil
-    end
+    expect(el(:email).displayed?).not_to eq nil unless els(:email).empty?
     # return self
   end
 
   def send_login_credentials(email, password)
-    unless els(:domain).empty?
-      send_team_name('slack-web-automation2')
-    end
+    send_team_name('slack-web-automation2') unless els(:domain).empty?
     expect(el(:email).displayed?).not_to eq nil
     el(:email).send_keys(email)
     expect(el(:email)).not_to eq nil
