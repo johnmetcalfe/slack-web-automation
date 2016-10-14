@@ -1,15 +1,16 @@
 Given(/^I am logged in and on the channels window$/) do
-  @system.channels_section.visit
+  @system.login_page.visit
   @system.login_page.send_login_credentials(TestData.users[1][:email], TestData.users[1][:password])
-  binding.pry
 end
 
 When(/^I search for a channel$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  binding.pry
+  @system.channels_section.open_channels
+  @system.channels_section.search_for(channel)
 end
 
 Then(/^It should be displayed on the page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.check_channel_present
 end
 
 Given(/^I am logged in and on the messaging page$/) do
