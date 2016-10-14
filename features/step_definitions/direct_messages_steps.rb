@@ -9,15 +9,15 @@ When(/^i start a direct message with a single person$/) do
 end
 
 Then(/^i should see the direct message window with a single recipient$/) do
-  @system.direct_messages_section.assert_recipient
+  @system.direct_messages_section.assert_single_recipient
 end
 
 When(/^i start a direct message with multiple people$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.direct_messages_section.start_direct_message_multiple
 end
 
 Then(/^i should see the direct message window with multiple recipients$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.direct_messages_section.assert_multiple_recipient
 end
 
 Given(/^currently in a direct message conversation$/) do
