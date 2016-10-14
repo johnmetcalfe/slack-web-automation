@@ -1,23 +1,18 @@
 class DirectMessagesSection < GenericPage
 
   @@wait = Selenium::WebDriver::Wait.new(timeout: 15)
-
-  def start_direct_message_single
-    @@wait.until do
-      el(:direct_messages_header).displayed?
-    end
-    el(:direct_messages_header).click
-    @@wait.until do
-      el(:im_browser_filter).displayed?
-    end
-    el(:im_browser_filter).send_keys "slackbot\n"
-  end
+  @@user1 = "slacktestuser3"
+  @@user2 = "slacktestbob"
+  @@user3 = "slacktestrob"
 
   def assert_single_recipient
-    expect(el(:im_title).text).to eq 'slackbot'
+    @@wait.until do
+      el(:im_title).displayed?
+    end
+    expect(el(:im_title).text).to eq "@#{@@user1}"
   end
 
-  def start_direct_message_multiple
+  def start_direct_message(user1="", user2="", user3="")
     @@wait.until do
       el(:direct_messages_header).displayed?
     end
@@ -25,15 +20,20 @@ class DirectMessagesSection < GenericPage
     @@wait.until do
       el(:im_browser_filter).displayed?
     end
-    el(:im_browser_filter).send_keys "slacktestuser3\n" + "slacktestbob\n" + "slacktestrob\n"
-    el(:im_browser_go).click
+    if user2 == "" && user3 == ""
+      el(:im_browser_filter).send_keys user1 + "\n"
+      el(:im_browser_go).click
+    else
+      el(:im_browser_filter).send_keys user1 + "\n" + user2 + "\n" + user3 + "\n"
+      el(:im_browser_go).click
+    end
   end
 
   def assert_multiple_recipient
     @@wait.until do
       el(:dm_title).displayed?
     end
-    expect(el(:dm_title).text).to eq 'slacktestuser3 slacktestbob slacktestrob'
+    expect(el(:dm_title).text).to eq "#{@@user1} #{@@user2} #{@@user3}"
   end
 
   @@dictionary = {

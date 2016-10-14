@@ -9,7 +9,6 @@ Scenario: Start a direct message with a single person
   When i start a direct message with a single person
   Then i should see the direct message window with a single recipient
 
-@wip
 Scenario: Start a direct message with multiple people
   Given i am logged in
   When i start a direct message with multiple people

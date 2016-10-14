@@ -5,7 +5,7 @@ Given(/^i am logged in$/) do
 end
 
 When(/^i start a direct message with a single person$/) do
-  @system.direct_messages_section.start_direct_message_single
+  @system.direct_messages_section.start_direct_message("slacktestuser3")
 end
 
 Then(/^i should see the direct message window with a single recipient$/) do
@@ -13,7 +13,7 @@ Then(/^i should see the direct message window with a single recipient$/) do
 end
 
 When(/^i start a direct message with multiple people$/) do
-  @system.direct_messages_section.start_direct_message_multiple
+  @system.direct_messages_section.start_direct_message("slacktestuser3", "slacktestbob", "slacktestrob")
 end
 
 Then(/^i should see the direct message window with multiple recipients$/) do
