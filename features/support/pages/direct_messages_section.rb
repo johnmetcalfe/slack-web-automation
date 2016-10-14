@@ -11,6 +11,9 @@ class DirectMessagesSection < GenericPage
       el(:im_browser_filter).displayed?
     end
     el(:im_browser_filter).send_keys "slackbot\n"
+  end
+
+  def assert_recipient
     expect(el(:im_title).text).to eq 'slackbot'
   end
 
