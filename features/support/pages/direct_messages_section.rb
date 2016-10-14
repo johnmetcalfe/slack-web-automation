@@ -12,6 +12,7 @@ class DirectMessagesSection < GenericPage
     expect(el(:im_title).text).to eq "@#{@@user1}"
   end
 
+  # TODO: change this method to use array instead of set number of users
   def start_direct_message(user1="", user2="", user3="")
     @@wait.until do
       el(:direct_messages_header).displayed?
