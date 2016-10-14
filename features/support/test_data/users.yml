@@ -2,12 +2,12 @@
 users:
 - username: slacktestbob
   email: slacktestbob@gmail.com
-  password: slackpass1058
+  password: slackpass1059
 - username: slacktestrob
   email: slacktestrob@gmail.com
   password: slackpass2
 - username: geri
-  email: slaktestgerrard@gmail.com
+  email: slacktestgerrard@gmail.com
   password: slackpass
 - username: slacktestuser3
   email: slacktestuser3@gmail.com

@@ -27,5 +27,4 @@ Scenario: Invalid channel valid login
 Scenario: Non-existent channel
   Given i am on the sign in page
   When i enter an invalid team name
-  And i click 'continue'
   Then i should see an appropriate error message

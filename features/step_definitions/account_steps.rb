@@ -1,6 +1,6 @@
 Given(/^I am logged in as a user and on the Account pages$/) do
   @system.account_page.visit
-  @system.login_page.sendLoginCredentials(TestData.users[0][:email], TestData.users[0][:password])
+  @system.login_page.send_login_credentials(TestData.users[0][:email], TestData.users[0][:password])
 end
 
 When(/^I enter a new username and click save$/) do
