@@ -4,11 +4,11 @@ class System
     @browser = browser
   end
 
-  def account
-    @account ||= SlackAccountPage.new @browser
+  def account_page
+    @account_page ||= AccountPage.new @browser
   end
 
-  def loginSlack
-    @slack ||= LoginPage.new @browser
+  def login_page
+    @login_page ||= LoginPage.new @browser
   end
 end

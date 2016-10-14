@@ -1,5 +1,5 @@
 class GenericPage
-
+  include RSpec::Matchers
   def initialize(driver)
     @driver = driver
   end
