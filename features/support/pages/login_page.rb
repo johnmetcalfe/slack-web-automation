@@ -28,6 +28,7 @@ class LoginPage < GenericPage
       el(:channel_title).displayed?
     end
     expect(el(:channel_title).attribute('innerHTML')).to eq "##{channel_name}"
+    @driver.get "#{TestData.url}/signin"
   end
 
   def click_enter_button

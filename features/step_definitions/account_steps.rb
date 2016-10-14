@@ -1,59 +1,41 @@
 Given(/^I am logged in as a user and on the Account pages$/) do
   @system.account_page.visit
+  @system.login_page.send_login_credentials(TestData.users[0][:email], TestData.users[0][:password])
 end
 
-When(/^I click expand on username$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I enter a new username and click save$/) do
+  @system.account_page.change_username_to(TestData.users[4][:username])
 end
 
-Then(/^I should be able to enter a new username and click save$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^It should be updated in the username section$/) do
+  @system.account_page.assert_username_is(TestData.users[4][:username])
+  @system.account_page.reset_username_to(TestData.users[0][:username])
 end
 
-Then(/^It should Be updated in the top left of the page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+
+When(/^I change my password$/) do
+  @system.account_page.change_password
 end
 
-When(/^I click expand on password$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^The account password should be updated$/) do
+  @system.account_page.assert_password_changed
 end
 
-When(/^Type in my current password$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I change my email address$/) do
+  @system.account_page.change_email_to(TestData.users[4][:email])
 end
 
-When(/^Type in a new password$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^The email address for the account should be updated$/) do
+  @system.account_page.assert_email_is(TestData.users[4][:email])
+  @system.account_page.reset_email_to_default
 end
 
-Then(/^the account password should be updated$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I change the timezone$/) do
+  @system.account_page.change_timezone_to(TestData.timezones[0])
 end
 
-When(/^I click expand on email address$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When(/^type in a new email address$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the email address for the account should be updated$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When(/^I click expand on Timezone$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When(/^I open the drop down menu$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When(/^I select a different timezone$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^the timeszone should be updated$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^The timezone should be updated$/) do
+  @system.account_page.assert_timezone_is(TestData.timezones[0])
+  @system.account_page.change_timezone_to(TestData.timezones[1])
+  @system.account_page.assert_timezone_is(TestData.timezones[1])
 end
