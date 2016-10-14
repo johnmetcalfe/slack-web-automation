@@ -1,6 +1,7 @@
 Given(/^I am logged in and on the channels window$/) do
-  @system.login_page.visit
-  @system.login_page.send_login_credentials(TestData.users[0][:email], TestData.users[0][:password])
+  @system.channels_section.visit
+  @system.login_page.send_login_credentials(TestData.users[1][:email], TestData.users[1][:password])
+  binding.pry
 end
 
 When(/^I search for a channel$/) do

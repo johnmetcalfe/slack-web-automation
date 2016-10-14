@@ -1,0 +1,3 @@
+class ChannelsSection < GenericPage
+
+end
