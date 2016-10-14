@@ -4,18 +4,6 @@ Given(/^i am logged in$/) do
   @system.login_page.check_for_channel('general')
 end
 
-Given(/^i have at least one direct message conversation$/) do
-  @system.direct_messages_section.check_for_direct_message_conversation
-end
-
-When(/^i search for a conversation$/) do
-  @system.direct_messages_section.search_for_conversation
-end
-
-Then(/^i should see the conversation available$/) do
-  @system.direct_messages_section.see_conversation
-end
-
 When(/^i start a direct message with a single person$/) do
   @system.direct_messages_section.start_direct_message_single
 end
