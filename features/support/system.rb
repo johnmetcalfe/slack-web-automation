@@ -11,4 +11,8 @@ class System
   def login_page
     @login_page ||= LoginPage.new @browser
   end
+
+  def direct_messages_section
+    @direct_messages_section ||= DirectMessagesSection.new @browser
+  end
 end
