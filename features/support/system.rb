@@ -5,10 +5,10 @@ class System
   end
 
   def account_page
-    @account ||= AccountPage.new @browser
+    @account_page ||= AccountPage.new @browser
   end
 
   def login_page
-    @login ||= LoginPage.new @browser
+    @login_page ||= LoginPage.new @browser
   end
 end

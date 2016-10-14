@@ -22,16 +22,6 @@ class TestData
     end
   end
 
-  def self.method_missing(name, *args, &block)
-    if name == :new
-      raise NoMethodError, "private method `new' called for #{self}:#{self.class}"
-    elsif @@data[name]
-      @@data[name]
-    else
-      raise NoMethodError, "No test data matches `#{name}'"
-    end
-  end
-
   def self.respond_to_missing?(name, include_private = false)
     !!(@@data[name]) || super
   end

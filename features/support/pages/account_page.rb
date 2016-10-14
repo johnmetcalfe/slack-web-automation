@@ -33,8 +33,8 @@ class AccountPage < GenericPage
 
   def change_password
     expand_section :password
-    @driver.find_element(id: "old_password").send_keys TestData.password
-    my_string = TestData.password
+    @driver.find_element(id: "old_password").send_keys TestData.users[0][:password]
+    my_string = TestData.users[0][:password]
     hello = my_string.scan( /\d+$/ ).first
     new_string = my_string.gsub(/(\W|\d)/, "")
     number = hello.to_i
@@ -43,9 +43,9 @@ class AccountPage < GenericPage
     $new_pass = "#{new_string}#{new_number}"
     @driver.find_element(id: "password").send_keys $new_pass
     @driver.find_element(css: "#change_password > div > form.col.span_1_of_2 > p:nth-child(5) > button").click
-    d = YAML::load_file(File.dirname(__FILE__) + "/../test_data/settings.yml") #Load
-    d['password'] = $new_pass #Modify
-    File.write(File.dirname(__FILE__) + "/../test_data/settings.yml", d.to_yaml)
+    d = YAML::load_file(File.dirname(__FILE__) + "/../test_data/users.yml") #Load
+    d['users'][0]['password'] = $new_pass #Modify
+    File.write(File.dirname(__FILE__) + "/../test_data/users.yml", d.to_yaml)
   end
 
   def assert_password_changed
@@ -56,7 +56,7 @@ class AccountPage < GenericPage
 
   def change_email_to(email)
     expand_section :email
-    @driver.find_element(id: "email_password").send_keys TestData.password
+    @driver.find_element(id: "email_password").send_keys TestData.users[0][:password]
     @driver.find_element(id: "new_email").send_keys email
     @driver.find_element(css: "#email_form > p:nth-child(5) > button").click
   end
@@ -67,7 +67,7 @@ class AccountPage < GenericPage
 
   def reset_email_to_default
     expand_section :email
-    @driver.find_element(id: "email_password").send_keys TestData.password
+    @driver.find_element(id: "email_password").send_keys TestData.users[0][:password]
     @driver.find_element(id: "new_email").send_keys "slacktestbob@gmail.com"
   end
 
@@ -90,7 +90,7 @@ class AccountPage < GenericPage
   ##### DICTIONARY #####
 
   @@dictionary = {
-    
+
   }
 
 end
