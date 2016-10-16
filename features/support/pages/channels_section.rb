@@ -45,6 +45,15 @@ class ChannelsSection < GenericPage
 
   end
 
+  def delete_channel(channel)
+    el(:archived_channels).click
+    el(:archived_channels_tab).click
+    el(:archived_channel_filter).send_keys channel
+    el(:archived_channels_select).click
+    el(:delete_channel).click
+    el(:delete_confirm).click
+  end
+
   ##### DICTIONARY #####
 
   @@dictionary = {
