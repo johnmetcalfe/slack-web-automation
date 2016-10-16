@@ -6,12 +6,12 @@ Feature: Channels
     Then It should be displayed on the page
 
   Scenario: Create new private channel
-    Given I am logged in and on the messaging page
+    Given I am logged in and on the channels window
     When I create a private channel
     Then It should appear in my list of channels
 
   Scenario: Create new public channel
-    Given I am logged in and on the messaging page
+    Given I am logged in and on the channels window
     When I create a public channel
     Then It should appear in my list of channels
 

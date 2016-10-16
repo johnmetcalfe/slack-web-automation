@@ -1,28 +1,25 @@
 Given(/^I am logged in and on the channels window$/) do
   @system.login_page.visit
   @system.login_page.send_login_credentials(TestData.users[1][:email], TestData.users[1][:password])
+  @system.login_page.check_for_channel('general')
+  @system.channels_section.open_channels
 end
 
 When(/^I search for a channel$/) do
-  binding.pry
-  @system.channels_section.open_channels
-  @system.channels_section.search_for(channel)
+  @system.channels_section.search_for(TestData.channel_search)
 end
 
 Then(/^It should be displayed on the page$/) do
-  @system.channels_section.check_channel_present
-end
-
-Given(/^I am logged in and on the messaging page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.assert_channel_present(TestData.channel_search)
 end
 
 When(/^I create a private channel$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.create_private_channel(TestData.private_channel)
 end
 
 Then(/^It should appear in my list of channels$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.assert_private_channel_created(TestData.private_channel)
+  @system.channels_section.archive_channel(TestData.private_channel)
 end
 
 When(/^I create a public channel$/) do
