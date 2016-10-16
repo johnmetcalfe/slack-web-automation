@@ -50,6 +50,7 @@ class ChannelsSection < GenericPage
     el(:archived_channels_tab).click
     el(:archived_channel_filter).send_keys channel
     el(:archived_channels_select).click
+    ##### NEED ADDING TO DICTIONARY #####
     el(:delete_channel).click
     el(:delete_confirm).click
   end
