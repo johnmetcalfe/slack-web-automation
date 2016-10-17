@@ -43,7 +43,13 @@ class DirectMessagesSection < GenericPage
     end
     @driver.find_element(class: "member_U2MTRCPU2").click
     expect(el(:im_title).text).to eq "@#{@@user3}"
+  end
+
+  def change_conversation
     @driver.find_element(class: "member_U2MTJVDJ5").click
+  end
+
+  def assert_conversation_changed
     expect(el(:im_title).text).to eq "@#{@@user2}"
   end
 

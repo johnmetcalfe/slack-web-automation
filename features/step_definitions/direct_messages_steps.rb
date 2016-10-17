@@ -25,11 +25,11 @@ Given(/^currently in a direct message conversation$/) do
 end
 
 When(/^i select a different conversation$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.direct_messages_section.change_conversation
 end
 
 Then(/^i should see the newly selected direct message window$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.direct_messages_section.assert_conversation_changed
 end
 
 When(/^i receive a direct message$/) do
