@@ -63,15 +63,11 @@ Then(/^The channel should open$/) do
 end
 
 When(/^I open about channels$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.about_channels
 end
 
-Then(/^I should be redirected back to the messaging page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^Be shown an alert box$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should be redirected to the meesaging page and shown an alert box$/) do
+  @system.channels_section.assert_about_alert
 end
 
 When(/^I receive a message$/) do

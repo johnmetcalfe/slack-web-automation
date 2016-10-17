@@ -33,8 +33,7 @@ Feature: Channels
   Scenario: About channels
     Given I am logged in and on the channels window
     When I open about channels
-    Then I should be redirected back to the messaging page
-    And Be shown an alert box
+    Then I should be redirected to the meesaging page and shown an alert box
 
   Scenario: Assert notifications
     Given I am logged in and on the messaging page

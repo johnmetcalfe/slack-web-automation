@@ -131,9 +131,22 @@ class ChannelsSection < GenericPage
     expect(el(:channel_title).attribute("innerHTML")).to include channel
   end
 
+  def about_channels
+    el(:about_channels).click
+  end
+
+  def assert_about_alert
+    @@wait.until do
+      el(:about_alert).displayed?
+    end
+    el(:about_alert).displayed?
+  end
+
   ##### DICTIONARY #####
 
   @@dictionary = {
+    about_alert: "#coachmark",
+    about_channels: "#channel_browser_footer > a.subtle_silver.right_margin.about_channels",
     channel_title: "#channel_title",
     archived_channels: "#channel_browser_footer > a:nth-child(2)",
     archive_tab: "#channel_archives_tabs > a.secondary.selected",
