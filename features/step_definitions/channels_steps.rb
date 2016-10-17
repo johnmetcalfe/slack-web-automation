@@ -14,16 +14,21 @@ Then(/^It should be displayed on the page$/) do
 end
 
 When(/^I create a private channel$/) do
-  @system.channels_section.create_private_channel(TestData.private_channel)
+  @system.channels_section.create_private_channel
 end
 
-Then(/^It should appear in my list of channels$/) do
-  @system.channels_section.assert_private_channel_created(TestData.private_channel)
-  @system.channels_section.archive_channel(TestData.private_channel)
+Then(/^A private channel should appear in my list of channels$/) do
+  @system.channels_section.assert_private_channel_created
+  @system.channels_section.archive_channel
 end
 
 When(/^I create a public channel$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.create_public_channel
+end
+
+Then(/^A public channel should appear in my list of channels$/) do
+  @system.channels_section.assert_public_channel_created
+  @system.channels_section.delete_channel
 end
 
 When(/^I sort the channels by creation date$/) do
@@ -35,23 +40,26 @@ Then(/^They should be listed in date order$/) do
 end
 
 When(/^I open archived channels$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.open_archived_channels
 end
 
 Then(/^I should see the archived channels$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.assert_archived_channels_opened
 end
 
 Given(/^I am logged in and on general channel$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.login_page.visit
+  @system.login_page.send_login_credentials(TestData.users[1][:email], TestData.users[1][:password])
+  @system.login_page.check_for_channel('general')
+  @system.channels_section.change_channel('general')
 end
 
 When(/^I pick a different channel$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.change_channel('random')
 end
 
 Then(/^The channel should open$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.assert_channel_open('random')
 end
 
 When(/^I open about channels$/) do

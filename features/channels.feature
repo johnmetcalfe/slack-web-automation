@@ -8,12 +8,12 @@ Feature: Channels
   Scenario: Create new private channel
     Given I am logged in and on the channels window
     When I create a private channel
-    Then It should appear in my list of channels
+    Then A private channel should appear in my list of channels
 
   Scenario: Create new public channel
     Given I am logged in and on the channels window
     When I create a public channel
-    Then It should appear in my list of channels
+    Then A public channel should appear in my list of channels
 
   Scenario: Sort channels by creation date
     Given I am logged in and on the channels window
