@@ -37,6 +37,16 @@ class DirectMessagesSection < GenericPage
     expect(el(:dm_title).text).to eq "#{@@user1} #{@@user2} #{@@user3}"
   end
 
+  def check_entered_conversation
+    @@wait.until do
+      el(:direct_messages_header).displayed?
+    end
+    @driver.find_element(class: "member_U2MTRCPU2").click
+    expect(el(:im_title).text).to eq "@#{@@user3}"
+    @driver.find_element(class: "member_U2MTJVDJ5").click
+    expect(el(:im_title).text).to eq "@#{@@user2}"
+  end
+
   @@dictionary = {
     direct_messages_header: '#direct_messages_header',
     im_browser_filter: '#im_browser_filter',
