@@ -41,12 +41,12 @@ class DirectMessagesSection < GenericPage
     @@wait.until do
       el(:direct_messages_header).displayed?
     end
-    @driver.find_element(class: "member_U2MTRCPU2").click
+    el(:user3_class).click
     expect(el(:im_title).text).to eq "@#{@@user3}"
   end
 
   def change_conversation
-    @driver.find_element(class: "member_U2MTJVDJ5").click
+    el(:user2_class).click
   end
 
   def assert_conversation_changed
@@ -58,7 +58,9 @@ class DirectMessagesSection < GenericPage
     im_browser_filter: '#im_browser_filter',
     im_title: '#im_title',
     im_browser_go: '.im_browser_go',
-    dm_title: '#dm_title'
+    dm_title: '#dm_title',
+    user2_class: '.member_U2MTJVDJ5',
+    user3_class: '.member_U2MTRCPU2'
   }
 
   def el(symbol)
