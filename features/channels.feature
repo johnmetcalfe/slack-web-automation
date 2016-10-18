@@ -24,7 +24,7 @@ Feature: Channels
     Given I am logged in and on the channels window
     When I open archived channels
     Then I should see the archived channels
-  
+
   Scenario: Change channel
     Given I am logged in and on general channel
     When I pick a different channel
@@ -34,7 +34,7 @@ Feature: Channels
     Given I am logged in and on the channels window
     When I open about channels
     Then I should be redirected to the meesaging page and shown an alert box
-
+  
   Scenario: Change purpose of channel
     Given I am logged in and on general channel
     When I change the purpose of the channel
