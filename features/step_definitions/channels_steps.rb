@@ -31,12 +31,12 @@ Then(/^A public channel should appear in my list of channels$/) do
   @system.channels_section.delete_channel
 end
 
-When(/^I sort the channels by creation date$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I sort the channels$/) do
+  @system.channels_section.sort_channels_by(TestData.sort_by[0])
 end
 
-Then(/^They should be listed in date order$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^They should be listed in order$/) do
+  @system.channels_section.assert_channels_sorted_by(TestData.sort_by[0])
 end
 
 When(/^I open archived channels$/) do
@@ -68,14 +68,6 @@ end
 
 Then(/^I should be redirected to the meesaging page and shown an alert box$/) do
   @system.channels_section.assert_about_alert
-end
-
-When(/^I receive a message$/) do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^The channel name should change to white$/) do
-  pending # Write code here that turns the phrase above into concrete actions
 end
 
 When(/^I change the purpose of the channel$/) do

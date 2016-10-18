@@ -108,6 +108,52 @@ class ChannelsSection < GenericPage
     el(:archived_channels_tab).click
   end
 
+  def sort_channels_by(category)
+    el(:channel_sort_by).click
+    els(:channel_sort_by_dropdown_options).each do |option|
+      option.click if option.attribute("value") == category
+    end
+  end
+
+  def assert_channels_sorted_by(category)
+    channel_names = []
+    creators = []
+    dates_created = []
+    number_of_members = []
+    if category == "name"
+      els(:channel_name).each do |name|
+        channel_names << name.attribute("innerHTML")
+      end
+      first_channel_name = channel_names[0].split("")
+      second_channel_name = channel_names[1].split("")
+      expect(first_channel_name[0] <= second_channel_name[0])
+    elsif category == "creator"
+      els(:creator_name).each do |name|
+        creators << name.attribute("innerHTML")
+      end
+      first_creator_name = creators[0].split("")
+      second_creator_name = creators[1].split("")
+      expect(first_creator_name[0] <= second_creator_name[0])
+    elsif category == "created"
+      els(:created_on).each do |date|
+        dates_created << date.attribute("innerHTML")
+      end
+      first_date = Date.parse(dates_created[0])
+      second_date = Date.parse(dates_created[1])
+      expect(first_date >= second_date)
+    elsif category == "members_high"
+      els(:members).each do |number|
+        number_of_members << number.attribute("innerHTML")
+      end
+      expect(number_of_members[0] >= number_of_members[1])
+    else category == "members_low"
+      els(:members).each do |number|
+        number_of_members << number.attribute("innerHTML")
+      end
+      expect(number_of_members[0] <= number_of_members[1])
+    end
+  end
+
   def open_archived_channels
     @driver.get "https://slack-web-automation2.slack.com/archives/archived"
   end
@@ -117,6 +163,7 @@ class ChannelsSection < GenericPage
   end
 
   def change_channel(channel)
+    sleep 2
     els(:channels).each do |channels|
       channels.click if channels.attribute("href") == "https://slack-web-automation2.slack.com/archives/#{channel}"
     end
@@ -182,7 +229,13 @@ class ChannelsSection < GenericPage
     channel_search_list: "#channel_list_container > div > div:nth-child(2) > div.channel_browser_row_header.overflow_ellipsis > span.channel_browser_channel_name.bold",
     delete_channel: "#channel_actions_div > form:nth-child(10) > a",
     delete_tick_box: "#delete_channel_cb",
-    delete_confirm: "#generic_dialog > div.modal-footer.c-modal_footer--default > a.btn.dialog_go.btn_danger"
+    delete_confirm: "#generic_dialog > div.modal-footer.c-modal_footer--default > a.btn.dialog_go.btn_danger",
+    channel_sort_by: "#channel_browser > div.small_bottom_margin.display_flex.align_items_center > div.channel_browser_sort_container > label",
+    channel_sort_by_dropdown_options: "#channel_browser_sort > option",
+    channel_name: ".channel_browser_channel_name",
+    creator_name: ".channel_browser_creator_name",
+    created_on: ".channel_browser_created_on",
+    members: ".channel_browser_member_count"
   }
 
   def el(symbol)
