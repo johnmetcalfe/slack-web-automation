@@ -11,4 +11,13 @@ class System
   def login_page
     @login_page ||= LoginPage.new @browser
   end
+
+  def channels_section
+    @channels_section ||= ChannelsSection.new @browser
+  end
+
+  def profile_page
+    @profile_page ||= ProfilePage.new @browser
+  end
+
 end
