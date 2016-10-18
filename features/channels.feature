@@ -4,12 +4,12 @@ Feature: Channels
     Given I am logged in and on the channels window
     When I search for a channel
     Then It should be displayed on the page
-  
+
   Scenario: Create new private channel
     Given I am logged in and on the channels window
     When I create a private channel
     Then A private channel should appear in my list of channels
-
+  
   Scenario: Create new public channel
     Given I am logged in and on the channels window
     When I create a public channel
