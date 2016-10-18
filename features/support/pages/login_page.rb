@@ -63,10 +63,6 @@ class LoginPage < GenericPage
   def els(window_number = 0, symbol)
     @driver[window_number].find_elements(css: @@dictionary[symbol])
   end
-
-  def goto (window_number = 0, website)
-    @driver[window_number].get(website)
-  end
 end
 
 # class Selenium::WebDriver::HTMLElement

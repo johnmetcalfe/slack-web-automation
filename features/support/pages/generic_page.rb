@@ -33,4 +33,8 @@ include Selenium::WebDriver
     login_page.check_for_channel(-1, 'general')
   end
 
+  def goto (window_number = 0, website)
+    @driver[window_number].get(website)
+  end
+
 end
