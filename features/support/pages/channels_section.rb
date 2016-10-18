@@ -17,11 +17,8 @@ class ChannelsSection < GenericPage
   def create_private_channel
     el(:channel_create_button).click
     el(:channel_create_slider).click
-
     @privvy = SecureRandom.uuid
     @priv = @privvy.slice! 0..20
-
-
     el(:channel_create_name).send_keys @priv
     el(:channel_save_button).click
   end
