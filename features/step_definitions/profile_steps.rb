@@ -1,5 +1,5 @@
 Given(/^I am on the profile page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  
 end
 
 When(/^I change the profile First Name$/) do
