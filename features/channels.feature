@@ -41,6 +41,6 @@ Feature: Channels
     Then The channel name should change to white
 
   Scenario: Change purpose of channel
-    Given I am logged in and on the messaging page
+    Given I am logged in and on general channel
     When I change the purpose of the channel
     Then It should be updated at the top of the page

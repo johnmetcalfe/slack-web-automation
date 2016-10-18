@@ -79,9 +79,10 @@ Then(/^The channel name should change to white$/) do
 end
 
 When(/^I change the purpose of the channel$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.change_purpose(TestData.purpose)
 end
 
 Then(/^It should be updated at the top of the page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.channels_section.assert_purpose_changed(TestData.purpose)
+  @system.channels_section.change_purpose(TestData.default_purpose)
 end

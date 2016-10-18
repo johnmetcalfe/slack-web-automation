@@ -142,9 +142,24 @@ class ChannelsSection < GenericPage
     el(:about_alert).displayed?
   end
 
+  def change_purpose(purpose)
+    @@wait.until do
+      el(:purpose).displayed?
+    end
+    sleep 4
+    el(:purpose).click
+    el(:purpose).send_keys purpose
+    el(:purpose).send_keys "\n"
+  end
+
+  def assert_purpose_changed(purpose)
+    expect(el(:purpose).attribute("innerHTML")).to eq purpose
+  end
+
   ##### DICTIONARY #####
 
   @@dictionary = {
+    purpose: "#channel_topic_text",
     about_alert: "#coachmark",
     about_channels: "#channel_browser_footer > a.subtle_silver.right_margin.about_channels",
     channel_title: "#channel_title",
