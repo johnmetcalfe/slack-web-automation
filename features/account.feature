@@ -1,5 +1,5 @@
 Feature: Account
-  
+
   Scenario: Edit Username
 
     Given I am logged in as a user and on the Account pages
@@ -18,7 +18,7 @@ Feature: Account
     Given I am logged in as a user and on the Account pages
     When I change my email address
     Then The email address for the account should be updated
-
+  
   Scenario: Change Timezone
 
     Given I am logged in as a user and on the Account pages
