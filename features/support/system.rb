@@ -15,4 +15,12 @@ class System
   def direct_messages_section
     @direct_messages_section ||= DirectMessagesSection.new @browser
   end
+
+  def profile_page
+    @profile_page ||= ProfilePage.new @browser
+  end
+
+  def channels_section
+    @channels_section ||= ChannelsSection.new @browser
+  end
 end

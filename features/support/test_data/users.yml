@@ -14,4 +14,4 @@ users:
   password: slackpass
 - username: testuser1
   email: slacktestpob@gmail.com
-  password: 
+  password:
