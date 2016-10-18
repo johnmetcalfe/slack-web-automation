@@ -1,0 +1,10 @@
+---
+channel_search: random
+default_purpose: purposeful purposes
+purpose: This is the new purpose of the channel
+sort_by:
+ - "name"
+ - "creator"
+ - created
+ - "members_high"
+ - "members_low"

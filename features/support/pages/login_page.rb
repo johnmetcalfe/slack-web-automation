@@ -1,5 +1,5 @@
 class LoginPage < GenericPage
-  @@wait = Selenium::WebDriver::Wait.new(timeout: 15)
+  @@wait = Selenium::WebDriver::Wait.new(timeout: 20000)
 
   def visit
     @driver.get 'https://slack.com/signin'
