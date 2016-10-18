@@ -2,15 +2,14 @@ class LoginPage < GenericPage
   @@wait = Selenium::WebDriver::Wait.new(timeout: 15)
 
   def visit
-    @driver.get 'https://slack.com/signin'
+    goto 'https://slack.com/signin'
     expect(el(:domain).displayed?).not_to eq nil
   end
 
   def send_team_name(team_name)
     el(:domain).send_keys(team_name)
     el(:submit_team_domain).click
-    expect(el(:email).displayed?).not_to eq nil unless els(:email).empty?
-    # return self
+    expect(el(:email).displayed?).not_to eq nil unless els(0, :email).empty?
   end
 
   def send_login_credentials(email, password)
@@ -22,13 +21,13 @@ class LoginPage < GenericPage
     click_enter_button
   end
 
-  def check_for_channel(channel_name)
-    @driver.get("https://slack-web-automation2.slack.com/messages/#{channel_name}")
+  def check_for_channel(window_number,channel_name)
+    goto "https://slack-web-automation2.slack.com/messages/#{channel_name}"
     @@wait.until do
       el(:channel_title).displayed?
     end
     expect(el(:channel_title).attribute('innerHTML')).to eq "##{channel_name}"
-    @driver.get "#{TestData.url}/signin"
+     goto "#{TestData.url}/signin"
   end
 
   def click_enter_button
@@ -57,12 +56,16 @@ class LoginPage < GenericPage
     submit_team_domain: '#submit_team_domain'
   }
 
-  def el(symbol)
-    @driver.find_element(css: @@dictionary[symbol])
+  def el(window_number = 0, symbol)
+    @driver[window_number].find_element(css: @@dictionary[symbol])
   end
 
-  def els(symbol)
-    @driver.find_elements(css: @@dictionary[symbol])
+  def els(window_number = 0, symbol)
+    @driver[window_number].find_elements(css: @@dictionary[symbol])
+  end
+
+  def goto (window_number = 0, website)
+    @driver[window_number].get(website)
   end
 end
 

@@ -13,13 +13,13 @@ Scenario: Start a direct message with multiple people
   Given i am logged in
   When i start a direct message with multiple people
   Then i should see the direct message window with multiple recipients
-@wip
+
 Scenario: Change direct message conversation
   Given i am logged in
   And currently in a direct message conversation
   When i select a different conversation
   Then i should see the newly selected direct message window
-
+@wip
 Scenario: Assert notifications
   Given i am logged in
   When i receive a direct message

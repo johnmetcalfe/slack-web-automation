@@ -1,7 +1,7 @@
 Given(/^i am logged in$/) do
   @system.login_page.visit
   @system.login_page.send_login_credentials('slacktestgerrard@gmail.com', 'slackpass')
-  @system.login_page.check_for_channel('general')
+  @system.login_page.check_for_channel(0, 'general')
 end
 
 When(/^i start a direct message with a single person$/) do
@@ -33,9 +33,9 @@ Then(/^i should see the newly selected direct message window$/) do
 end
 
 When(/^i receive a direct message$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.direct_messages_section.send_message
 end
 
 Then(/^i should see a notification next to the direct message$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.direct_messages_section.check_message_received
 end

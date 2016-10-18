@@ -41,16 +41,39 @@ class DirectMessagesSection < GenericPage
     @@wait.until do
       el(:direct_messages_header).displayed?
     end
-    el(:user3_class).click
-    expect(el(:im_title).text).to eq "@#{@@user3}"
+    el(:user2_class).click
+    expect(el(:im_title).text).to eq "@#{@@user2}"
   end
 
   def change_conversation
-    el(:user2_class).click
+    @@wait.until do
+      el(:direct_messages_header).displayed?
+    end
+    el(:user3_class).click
   end
 
   def assert_conversation_changed
-    expect(el(:im_title).text).to eq "@#{@@user2}"
+    expect(el(:im_title).text).to eq "@#{@@user3}"
+  end
+
+  def send_message
+    change_conversation
+    el(:message_input).send_keys "Hello, this is a message\n"
+  end
+
+  def check_message_received
+    new_browser
+    @@wait.until do
+      el(-1, :user1_class).displayed?
+    end
+    expect(el(-1, :user1_unread).text).to eq "1"
+    # clicks to get rid of notification
+    el(-1, :user1_class).click
+    # TODO: change sleeps to wait for message unread banner to disappear
+    sleep 3
+    el(-1, :user2_class).click
+    sleep 2
+    @driver[-1].quit
   end
 
   @@dictionary = {
@@ -59,16 +82,20 @@ class DirectMessagesSection < GenericPage
     im_title: '#im_title',
     im_browser_go: '.im_browser_go',
     dm_title: '#dm_title',
+    message_input: '#message-input',
+    new_msg_info: '#new_msg_info',
+    user1_class: '.member_U2MU1L277',
     user2_class: '.member_U2MTJVDJ5',
-    user3_class: '.member_U2MTRCPU2'
+    user3_class: '.member_U2MTRCPU2',
+    user1_unread: '.unread_highlight_U2MU1L277'
   }
 
-  def el(symbol)
-    @driver.find_element(css: @@dictionary[symbol])
+  def el(window_number = 0, symbol)
+    @driver[window_number].find_element(css: @@dictionary[symbol])
   end
 
-  def els(symbol)
-    @driver.find_elements(css: @@dictionary[symbol])
+  def els(window_number = 0, symbol)
+    @driver[window_number].find_elements(css: @@dictionary[symbol])
   end
 
 end
