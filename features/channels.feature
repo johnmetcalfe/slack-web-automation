@@ -34,7 +34,7 @@ Feature: Channels
     Given I am logged in and on the channels window
     When I open about channels
     Then I should be redirected to the meesaging page and shown an alert box
-  @wip
+
   Scenario: Change purpose of channel
     Given I am logged in and on general channel
     When I change the purpose of the channel
