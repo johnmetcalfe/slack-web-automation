@@ -1,10 +1,10 @@
 Feature: Channels
-  @wip
+
   Scenario: Searching channels
     Given I am logged in and on the channels window
     When I search for a channel
     Then It should be displayed on the page
-
+  
   Scenario: Create new private channel
     Given I am logged in and on the channels window
     When I create a private channel

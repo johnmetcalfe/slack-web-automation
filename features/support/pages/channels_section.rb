@@ -49,7 +49,7 @@ class ChannelsSection < GenericPage
   end
 
   def archive_channel
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
     @@wait.until do
       el(:archived_channels_filter).displayed?
@@ -71,12 +71,12 @@ class ChannelsSection < GenericPage
     end
     sleep 2
     el(:archive_confirm).click
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
   end
 
   def delete_channel
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
     @@wait.until do
       el(:archived_channels_filter).displayed?
@@ -104,7 +104,7 @@ class ChannelsSection < GenericPage
     end
     sleep 2
     el(:delete_confirm).click
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
   end
 
@@ -155,7 +155,7 @@ class ChannelsSection < GenericPage
   end
 
   def open_archived_channels
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
   end
 
   def assert_archived_channels_opened
