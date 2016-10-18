@@ -15,6 +15,7 @@ class System
   def sidebar_section
     @sidebar_section ||= SidebarSection.new @browser
   end
+  
   def profile_page
     @profile_page ||= ProfilePage.new @browser
   end
