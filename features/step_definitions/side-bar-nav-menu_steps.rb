@@ -1,5 +1,7 @@
 Given(/^I am logged in and on the messaging window$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.login_page.visit
+  @system.login_page.send_login_credentials(TestData.users[1][:email], TestData.users[1][:password])
+  @system.login_page.check_for_channel('general')
 end
 
 When(/^I navigate to profile and account$/) do
