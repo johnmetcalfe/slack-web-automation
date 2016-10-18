@@ -20,7 +20,7 @@ class LoginPage < GenericPage
     click_enter_button
   end
 
-  def check_for_channel(window_number,channel_name)
+  def check_for_channel(window_number = 0,channel_name)
     goto "https://slack-web-automation2.slack.com/messages/#{channel_name}"
     @@wait.until do
       el(:channel_title).displayed?

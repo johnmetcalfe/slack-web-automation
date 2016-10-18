@@ -238,16 +238,12 @@ class ChannelsSection < GenericPage
     members: ".channel_browser_member_count"
   }
 
-  def el(symbol)
-
-    @driver.find_element(css: @@dictionary[symbol])
-
+  def el(window_number = 0, symbol)
+    @driver[window_number].find_element(css: @@dictionary[symbol])
   end
 
-  def els(symbol)
-
-    @driver.find_elements(css: @@dictionary[symbol])
-
+  def els(window_number = 0, symbol)
+    @driver[window_number].find_elements(css: @@dictionary[symbol])
   end
 
   ##### INCREMENT #####
