@@ -14,6 +14,7 @@ class System
 
   def profile_page
     @profile_page ||= ProfilePage.new @browser
+  end
 
   def channels_section
     @channels_section ||= ChannelsSection.new @browser
