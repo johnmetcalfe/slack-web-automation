@@ -14,7 +14,7 @@ Feature: Channels
     Given I am logged in and on the channels window
     When I create a public channel
     Then A public channel should appear in my list of channels
-  
+
   Scenario: Sort channels
     Given I am logged in and on the channels window
     When I sort the channels
@@ -24,7 +24,7 @@ Feature: Channels
     Given I am logged in and on the channels window
     When I open archived channels
     Then I should see the archived channels
-
+  
   Scenario: Change channel
     Given I am logged in and on general channel
     When I pick a different channel
