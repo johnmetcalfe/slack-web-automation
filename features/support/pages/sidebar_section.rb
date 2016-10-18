@@ -1,0 +1,3 @@
+class SidebarSection < GenericPage
+
+end

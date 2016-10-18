@@ -11,4 +11,8 @@ class System
   def login_page
     @login_page ||= LoginPage.new @browser
   end
+
+  def sidebar_section
+    @sidebar_section ||= SidebarSection.new @browser
+  end
 end
