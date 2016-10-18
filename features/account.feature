@@ -1,5 +1,5 @@
 Feature: Account
-
+  
   Scenario: Edit Username
 
     Given I am logged in as a user and on the Account pages
@@ -8,7 +8,7 @@ Feature: Account
 
 
   # Scenario: Edit Password
-  
+
   #   Given I am logged in as a user and on the Account pages
   #   When I change my password
   #   Then The account password should be updated
