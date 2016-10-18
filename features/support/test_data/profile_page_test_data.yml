@@ -1,0 +1,11 @@
+---
+  first_name: Alfie
+  last_name: Thornton
+  what_I_do: Software engineer
+  phone_number: 01800 123456
+  skype: test.skype23
+  default_first_name: Bob
+  default_last_name: Builder
+  default_what_I_do: Defualt What I DO
+  default_phone_number: 01800 654321
+  default_skype: default.skype23

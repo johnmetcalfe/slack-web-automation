@@ -89,6 +89,8 @@ class AccountPage < GenericPage
     el(:timezone_text).text.include? new_timezone
   end
 
+
+
   ##### DICTIONARY #####
 
   @@dictionary = {
