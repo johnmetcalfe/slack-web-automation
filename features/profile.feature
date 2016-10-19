@@ -12,7 +12,7 @@ Feature: Profile
 
   Scenario: Change What I Do
     Given I am on the profile page
-    When I chaneg the profile What I Do
+    When I change the profile What I Do
     Then The What I Do should be updated on the page
 
   Scenario: Change Phone Number
