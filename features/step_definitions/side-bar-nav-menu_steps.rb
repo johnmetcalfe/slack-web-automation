@@ -30,11 +30,11 @@ Then(/^My account should be away$/) do
 end
 
 When(/^I naviagte to Help and Feedback$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.sidebar_section.go_to_help_and_feedback
 end
 
 Then(/^I should be taken to the help page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.sidebar_section.assert_feedback_appears(TestData.feedback_heading)
 end
 
 When(/^I click invite people$/) do

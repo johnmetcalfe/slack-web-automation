@@ -40,6 +40,7 @@ class SidebarSection < GenericPage
 
   def go_to_preferences
     sleep 1
+    binding.pry
     el(:team_menu).click
     sleep 1
     el(:member_preferences).click
@@ -50,26 +51,35 @@ class SidebarSection < GenericPage
     expect(source.include? preferences_heading).to be true
   end
 
+  def go_to_help_and_feedback
+    sleep 2
+    el(:team_menu).click
+    sleep 1
+    el(:help_and_feedback).click
+  end
+
+  def assert_feedback_appears(feedback_heading)
+    sleep 1
+    expect(source.include? feedback_heading).to be true
+  end
+
   @@dictionary = {
     team_menu: "#team_menu",
     away_toggle: "#member_presence > a > span",
     away_circle: "#presence",
     profile_and_account: "#member_account_item > a",
     member_name: ".member_name",
-    member_preferences: "#member_prefs_item"
+    member_preferences: "#member_prefs_item",
+    help_and_feedback: "#team_help"
   }
 
 
-  def el(symbol)
-
-    @driver.find_element(css: @@dictionary[symbol])
-
+  def el(window_number = 0, symbol)
+    @driver[window_number].find_element(css: @@dictionary[symbol])
   end
 
-  def els(symbol)
-
-    @driver.find_elements(css: @@dictionary[symbol])
-
+  def els(window_number = 0, symbol)
+    @driver[window_number].find_elements(css: @@dictionary[symbol])
   end
 
 end

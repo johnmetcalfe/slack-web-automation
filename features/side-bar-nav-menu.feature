@@ -10,10 +10,10 @@ Feature: Sidebar Nav
     When I navigate to preferences
     Then I should be taken to the preferences page
 
-  Scenario: Set yourself to away
-    Given I am logged in and on the messaging window
-    When I set myself to away
-    Then My account should be away
+#  Scenario: Set yourself to away
+#    Given I am logged in and on the messaging window
+#    When I set myself to away
+#    Then My account should be away
 
   Scenario: Help and Feedback
     Given I am logged in and on the messaging window
