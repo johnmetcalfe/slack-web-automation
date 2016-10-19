@@ -1,0 +1,17 @@
+---
+users:
+- username: slacktestbob
+  email: slacktestbob@gmail.com
+  password: slackpass1063
+- username: slacktestrob
+  email: slacktestrob@gmail.com
+  password: slackpass2
+- username: geri
+  email: slacktestgerrard@gmail.com
+  password: slackpass
+- username: slacktestuser3
+  email: slacktestuser3@gmail.com
+  password: slackpass
+- username: testuser1
+  email: slacktestpob@gmail.com
+  password:
