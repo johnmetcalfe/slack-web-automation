@@ -16,6 +16,10 @@ class System
     @direct_messages_section ||= DirectMessagesSection.new @browser
   end
 
+  def message_bar_section
+    @message_bar_section ||= MessageBar.new @browser
+  end
+
   def profile_page
     @profile_page ||= ProfilePage.new @browser
   end
