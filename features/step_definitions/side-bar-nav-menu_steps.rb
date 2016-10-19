@@ -16,16 +16,17 @@ When(/^I navigate to preferences$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^I shoudl be taken to the preferences page$/) do
+Then(/^I should be taken to the preferences page$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
 When(/^I set myself to away$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.sidebar_section.toggle_away('away')
 end
 
 Then(/^My account should be away$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.sidebar_section.assert_away
+  @system.sidebar_section.toggle_away('active')
 end
 
 When(/^I naviagte to Help and Feedback$/) do
