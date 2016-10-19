@@ -3,8 +3,10 @@ include RSpec::Matchers
 include Selenium::WebDriver
 @@wait = Selenium::WebDriver::Wait.new(timeout: 20000)
 
+
 # TODO: Set default for browser
 #@@window_number = 0
+
 
   def initialize(driver)
     @driver = []

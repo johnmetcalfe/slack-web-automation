@@ -102,7 +102,7 @@ class AccountPage < GenericPage
     password_submit_button: "#change_password > div > form.col.span_1_of_2 > p:nth-child(5) > button",
     timezone_open_dropdown_button: "#change_timezone > form > div > p.no_bottom_margin > label > select",
     timezone_dropdown_options: "#change_timezone > form > div > p.no_bottom_margin > label > select > option",
-    timezone_submit_button: "#change_timezone > form > div > p:nth-child(2) > button > span.ladda-label",
+    timezone_submit_button: "#change_timezone > form > div > p:nth-child(2) > button",
     timezone_text: "#change_timezone > form > p > b",
     username_input: ".username_input",
     username_submit_button: "#change_username > div > form > div > button"
