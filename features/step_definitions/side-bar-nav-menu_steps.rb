@@ -20,14 +20,14 @@ Then(/^I should be taken to the preferences page$/) do
   @system.sidebar_section.assert_preferences_appears(TestData.preferences_heading)
 end
 
-When(/^I set myself to away$/) do
-  @system.sidebar_section.toggle_away('away')
-end
-
-Then(/^My account should be away$/) do
-  @system.sidebar_section.assert_away
-  @system.sidebar_section.toggle_away('active')
-end
+# When(/^I set myself to away$/) do
+#   @system.sidebar_section.toggle_away('away')
+# end
+#
+# Then(/^My account should be away$/) do
+#   @system.sidebar_section.assert_away
+#   @system.sidebar_section.toggle_away('active')
+# end
 
 When(/^I naviagte to Help and Feedback$/) do
   @system.sidebar_section.go_to_help_and_feedback
@@ -38,9 +38,9 @@ Then(/^I should be taken to the help page$/) do
 end
 
 When(/^I click invite people$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.sidebar_section.invite_people
 end
 
 Then(/^I should be taken to the page to invite people$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.sidebar_section.assert_invite_page_appears(TestData.invite_people_heading)
 end

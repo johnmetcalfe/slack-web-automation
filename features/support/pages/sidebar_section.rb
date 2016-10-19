@@ -28,6 +28,7 @@ class SidebarSection < GenericPage
 
   def go_to_profile_and_account
     sleep 1
+    binding.pry
     el(:team_menu).click
     sleep 1
     el(:profile_and_account).click
@@ -62,6 +63,17 @@ class SidebarSection < GenericPage
     sleep 1
     expect(source.include? feedback_heading).to be true
   end
+  def invite_people
+    sleep 1
+    el(:team_menu).click
+    sleep 1
+    el(:invite_people).click
+  end
+
+  def assert_invite_page_appears(invite_people_heading)
+    sleep 1
+    expect(source.include? invite_people_heading).to be true
+  end
 
   @@dictionary = {
     team_menu: "#team_menu",
@@ -70,7 +82,8 @@ class SidebarSection < GenericPage
     profile_and_account: "#member_account_item > a",
     member_name: ".member_name",
     member_preferences: "#member_prefs_item",
-    help_and_feedback: "#team_help"
+    help_and_feedback: "#team_help",
+    invite_people: "#team_invitations > a"
   }
 
 
