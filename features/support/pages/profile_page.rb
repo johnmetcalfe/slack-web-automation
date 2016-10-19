@@ -27,6 +27,7 @@ class ProfilePage < GenericPage
     el(:first_name).clear
     el(:first_name).send_keys first_name
     el(:profile_save).click
+    sleep 2
   end
 
   def assert_first_name_changed(first_name)
