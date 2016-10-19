@@ -20,14 +20,13 @@ Then(/^I should be taken to the preferences page$/) do
   @system.sidebar_section.assert_preferences_appears(TestData.preferences_heading)
 end
 
-# When(/^I set myself to away$/) do
-#   @system.sidebar_section.toggle_away('away')
-# end
-#
-# Then(/^My account should be away$/) do
-#   @system.sidebar_section.assert_away
-#   @system.sidebar_section.toggle_away('active')
-# end
+When(/^I set myself to away$/) do
+  @system.sidebar_section.set_away
+end
+
+Then(/^My account should be away$/) do
+  @system.sidebar_section.assert_away
+end
 
 When(/^I naviagte to Help and Feedback$/) do
   @system.sidebar_section.go_to_help_and_feedback

@@ -1,20 +1,23 @@
 class SidebarSection < GenericPage
 
 
-  def toggle_away(input)
-    sleep 2
-    case input
-    when 'away' === input
-      if el(:away_circle).attribute("class") == "ts_icon ts_icon_presence active" then
-        el(:team_menu).click
-        el(:away_toggle).click
-      end
-    when 'active' === input
-      if el(:away_circle).attribute("class") == "ts_icon ts_icon_presence away" then
-        el(:team_menu).click
-        el(:away_toggle).click
-      end
-    else
+  def set_away
+    sleep 4
+    if el(:away_circle).attribute("class") == "ts_icon ts_icon_presence active"
+      el(:team_menu).click
+      el(:away_toggle).click
+    elsif el(:away_circle).attribute("class") == "ts_icon ts_icon_presence away"
+
+    end
+  end
+
+  def set_active
+    sleep 4
+    if el(:away_circle).attribute("class") == "ts_icon ts_icon_presence active"
+
+    elsif el(:away_circle).attribute("class") == "ts_icon ts_icon_presence away"
+      el(:team_menu).click
+      el(:away_toggle).click
     end
   end
 
@@ -23,12 +26,12 @@ class SidebarSection < GenericPage
       el(:away_circle).attribute("class") == "ts_icon ts_icon_presence away"
     end
     expect(el(:away_circle).attribute("class")).to eq "ts_icon ts_icon_presence away"
+    set_active
     sleep 2
   end
 
   def go_to_profile_and_account
     sleep 1
-    binding.pry
     el(:team_menu).click
     sleep 1
     el(:profile_and_account).click
@@ -41,7 +44,6 @@ class SidebarSection < GenericPage
 
   def go_to_preferences
     sleep 1
-    binding.pry
     el(:team_menu).click
     sleep 1
     el(:member_preferences).click
