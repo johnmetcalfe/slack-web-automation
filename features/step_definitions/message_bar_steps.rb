@@ -13,15 +13,15 @@ When(/^i send a message$/) do
 end
 
 Then(/^the message should appear as successfully sent$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.message_bar_section.check_message_sent
 end
 
 When(/^i send an emoji$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.message_bar_section.send_emoji
 end
 
 Then(/^the emoji should appear as successfully sent$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @system.message_bar_section.check_emoji
 end
 
 When(/^i send a file$/) do

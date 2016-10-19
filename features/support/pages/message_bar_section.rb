@@ -7,21 +7,40 @@ def send_message
   end
   el(:message_input).send_keys("this message should appear in the textbox \n")
   #binding.pry
-  expect(els(:message_body)[-1].attribute('innerHTML')).to eq 'this message should appear in the textbox'
 
 end
 
+def check_message_sent
+  expect(els(:message_body)[-1].attribute('innerHTML')).to eq 'this message should appear in the textbox'
+end
+
+def send_emoji
+  expect(url).to include "https://slack-web-automation2.slack.com/messages"
+  # @@wait.until do
+  # els(:emoji_button).length > 0
+  # end
+  sleep 3
+  el(:message_input).send_keys("this makes sure the previous test does not contain an emoji\n")
+  els(:emoji_button)[0].click
+  @@wait.until do
+    els(:emoji_icons).length > 0
+  end
+  els(:emoji_icons).sample.click
+  sleep 2
+  expect(el(:message_input)).not_to eq nil
+  el(:message_input).send_keys("\n")
+end
+
+def check_emoji
+  expect(els(:message_body)[-1].attribute('innerHTML')).to include('emoji')
+  binding.pry
+end
+
 @@dictionary = {
-  alert_error: '.alert_error',
-  channel_title: '#channel_title',
-  direct_messages: '#direct_messages',
-  domain: '#domain',
-  email: '#email',
-  password: '#password',
-  signin_btn: '#signin_btn',
-  submit_team_domain: '#submit_team_domain',
   message_input: '#message-input',
-  message_body: '.message_body'
+  message_body: '.message_body' ,
+  emoji_button: '.ts_icon_happy_smile',
+  emoji_icons: '.emoji_li'
 }
 
 def el(window_number = 0, symbol)

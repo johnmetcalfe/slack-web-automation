@@ -1,12 +1,12 @@
 
 Feature: Message Bar
-@wip
+
 Scenario: Type and Send Message
   Given I am logged in
   And i have a conversation open
   When i send a message
   Then the message should appear as successfully sent
-
+@wip
 Scenario: Send Emojis
   Given I am logged in
   And i have a conversation open
