@@ -1,15 +1,10 @@
 class DirectMessagesSection < GenericPage
 
-  @@wait = Selenium::WebDriver::Wait.new(timeout: 15)
-  @@user1 = "slacktestuser3"
-  @@user2 = "slacktestbob"
-  @@user3 = "slacktestrob"
-
   def assert_single_recipient
     @@wait.until do
       el(:im_title).displayed?
     end
-    expect(el(:im_title).text).to eq "@#{@@user1}"
+    expect(el(:im_title).text).to eq "@#{TestData.users[1][:username]}"
   end
 
   # TODO: change this method to use array instead of set number of users
@@ -34,7 +29,7 @@ class DirectMessagesSection < GenericPage
     @@wait.until do
       el(:dm_title).displayed?
     end
-    expect(el(:dm_title).text).to eq "#{@@user1} #{@@user2} #{@@user3}"
+    expect(el(:dm_title).text).to eq "#{TestData.users[3][:username]} #{TestData.users[0][:username]} #{TestData.users[1][:username]}"
   end
 
   def check_entered_conversation
@@ -42,7 +37,7 @@ class DirectMessagesSection < GenericPage
       el(:direct_messages_header).displayed?
     end
     el(:user2_class).click
-    expect(el(:im_title).text).to eq "@#{@@user2}"
+    expect(el(:im_title).text).to eq "@#{TestData.users[0][:username]}"
   end
 
   def change_conversation
@@ -53,7 +48,7 @@ class DirectMessagesSection < GenericPage
   end
 
   def assert_conversation_changed
-    expect(el(:im_title).text).to eq "@#{@@user3}"
+    expect(el(:im_title).text).to eq "@#{TestData.users[1][:username]}"
   end
 
   def send_message

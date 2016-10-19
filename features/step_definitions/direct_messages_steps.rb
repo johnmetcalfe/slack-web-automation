@@ -1,11 +1,11 @@
 Given(/^i am logged in$/) do
   @system.login_page.visit
-  @system.login_page.send_login_credentials('slacktestgerrard@gmail.com', 'slackpass')
+  @system.login_page.send_login_credentials(TestData.users[2][:email], TestData.users[2][:password])
   @system.login_page.check_for_channel(0, 'general')
 end
 
 When(/^i start a direct message with a single person$/) do
-  @system.direct_messages_section.start_direct_message("slacktestuser3")
+  @system.direct_messages_section.start_direct_message(TestData.users[1][:username])
 end
 
 Then(/^i should see the direct message window with a single recipient$/) do
@@ -13,7 +13,7 @@ Then(/^i should see the direct message window with a single recipient$/) do
 end
 
 When(/^i start a direct message with multiple people$/) do
-  @system.direct_messages_section.start_direct_message("slacktestuser3", "slacktestbob", "slacktestrob")
+  @system.direct_messages_section.start_direct_message(TestData.users[3][:username], TestData.users[0][:username], TestData.users[1][:username])
 end
 
 Then(/^i should see the direct message window with multiple recipients$/) do
