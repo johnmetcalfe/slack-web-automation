@@ -1,4 +1,3 @@
-@wip
 Feature: Direct Messages Section
 As an employee
 I want to directly message people
