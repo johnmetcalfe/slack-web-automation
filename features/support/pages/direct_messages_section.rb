@@ -61,6 +61,7 @@ class DirectMessagesSection < GenericPage
     @@wait.until do
       el(-1, :user1_class).displayed?
     end
+    sleep 2
     expect(el(-1, :user1_unread).text).to eq "1"
     # clicks to get rid of notification
     el(-1, :user1_class).click
@@ -80,8 +81,8 @@ class DirectMessagesSection < GenericPage
     message_input: '#message-input',
     new_msg_info: '#new_msg_info',
     user1_class: '.member_U2MU1L277',
-    user2_class: '.member_presence_U2MTJVDJ5',
-    user3_class: '.member_presence_U2MTRCPU2',
+    user2_class: '.member_U2MTJVDJ5',
+    user3_class: '.member_U2MTRCPU2',
     user1_unread: '.unread_highlight_U2MU1L277'
   }
 
