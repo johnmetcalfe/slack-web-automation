@@ -15,7 +15,7 @@ class System
   def sidebar_section
     @sidebar_section ||= SidebarSection.new @browser
   end
-
+  
   def direct_messages_section
     @direct_messages_section ||= DirectMessagesSection.new @browser
   end
