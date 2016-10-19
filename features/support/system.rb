@@ -12,6 +12,10 @@ class System
     @login_page ||= LoginPage.new @browser
   end
 
+  def direct_messages_section
+    @direct_messages_section ||= DirectMessagesSection.new @browser
+  end
+
   def profile_page
     @profile_page ||= ProfilePage.new @browser
   end

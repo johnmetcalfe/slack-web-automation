@@ -23,7 +23,7 @@ Then(/^The Last Name should be updated on the page$/) do
   @system.profile_page.change_last_name(TestData.default_last_name)
 end
 
-When(/^I chaneg the profile What I Do$/) do
+When(/^I change the profile What I Do$/) do
   @system.profile_page.change_what_I_do(TestData.what_I_do)
 end
 

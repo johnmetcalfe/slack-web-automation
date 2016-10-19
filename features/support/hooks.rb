@@ -1,4 +1,3 @@
-
 # Setup
 browser = Selenium::WebDriver.for :chrome
 

@@ -17,11 +17,8 @@ class ChannelsSection < GenericPage
   def create_private_channel
     el(:channel_create_button).click
     el(:channel_create_slider).click
-
     @privvy = SecureRandom.uuid
     @priv = @privvy.slice! 0..20
-
-
     el(:channel_create_name).send_keys @priv
     el(:channel_save_button).click
   end
@@ -49,7 +46,7 @@ class ChannelsSection < GenericPage
   end
 
   def archive_channel
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
     @@wait.until do
       el(:archived_channels_filter).displayed?
@@ -71,12 +68,12 @@ class ChannelsSection < GenericPage
     end
     sleep 2
     el(:archive_confirm).click
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
   end
 
   def delete_channel
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
     @@wait.until do
       el(:archived_channels_filter).displayed?
@@ -104,7 +101,7 @@ class ChannelsSection < GenericPage
     end
     sleep 2
     el(:delete_confirm).click
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
     el(:archived_channels_tab).click
   end
 
@@ -155,7 +152,7 @@ class ChannelsSection < GenericPage
   end
 
   def open_archived_channels
-    @driver.get "https://slack-web-automation2.slack.com/archives/archived"
+    goto "https://slack-web-automation2.slack.com/archives/archived"
   end
 
   def assert_archived_channels_opened
@@ -238,16 +235,12 @@ class ChannelsSection < GenericPage
     members: ".channel_browser_member_count"
   }
 
-  def el(symbol)
-
-    @driver.find_element(css: @@dictionary[symbol])
-
+  def el(window_number = 0, symbol)
+    @driver[window_number].find_element(css: @@dictionary[symbol])
   end
 
-  def els(symbol)
-
-    @driver.find_elements(css: @@dictionary[symbol])
-
+  def els(window_number = 0, symbol)
+    @driver[window_number].find_elements(css: @@dictionary[symbol])
   end
 
   ##### INCREMENT #####
